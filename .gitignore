@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+.pytest_cache/
+*.py[cod]
+*.egg-info/
+data/
+Datasets/
+artifacts_rebuilt/
+artifacts_v2_transfer/
+.uv-cache/
+*.log
