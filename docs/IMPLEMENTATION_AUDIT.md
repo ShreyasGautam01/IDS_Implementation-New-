@@ -51,6 +51,6 @@ The project is considered execution-ready only when:
 ## Current empirical status (2026-11-04)
 
 - The primary NF-UNSW-NB15-v3 temporal run completed for seeds 42–45 on one fixed split. Cross-run integrity and prediction-derived OSR/routing metrics were audited; see `EXPERIMENT_RESULTS.md` and `RELIABILITY_DIAGNOSTICS.md`.
-- A bounded four-seed binary transfer pilot was run on the available v2 datasets. Both lacked flow timestamps, so source evaluation used stratified random splitting; these are exploratory non-temporal results and do not validate the v3 temporal-transfer protocol. See `CROSS_DATASET_V2_PILOT.md`.
-- A real-data monotonicity experiment has not been run. Existing monotonicity coverage is synthetic testing only.
+- A bounded four-seed binary transfer pilot was run on the available v2 datasets. Both lacked flow timestamps, so source evaluation used stratified random splitting; these are non-temporal results. A separate v3 four-schema binary transfer experiment has since completed on UNSW/CIC-IDS2018; see `CROSS_DATASET_V3_EXPERIMENT.md`.
+- A separate seed-42 binary monotonicity sensitivity experiment has since completed on NF-UNSW-NB15-v3; see `MONOTONICITY_V3_EXPERIMENT.md`. Neither separate experiment validates the multiclass reliability pipeline.
 - The exact v3 file checksum is recorded. Its source bag identifier is known, but acquisition date is not yet in the experiment manifest.

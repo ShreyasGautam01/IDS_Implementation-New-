@@ -46,7 +46,7 @@ High overall accuracy among automated rows is dominated by benign and Generic tr
 
 ## Feature-schema interpretation
 
-The executable contract and unit test define these as removal ablations: `baseline` retains all present configured groups, `set_a` excludes TTL, `set_b` excludes TTL and window, and `set_c` excludes TTL, window, and protocol. The earlier protocol text claiming additive groups has been corrected. See `feature_manifest_nf_unsw_nb15_v3.csv` for the v3 column inventory. The original manuscript's intended ablation remains unverified, so historical ablation claims should be checked against its source before publication.
+The executable contract and unit test define these as removal ablations: `baseline` retains all present configured groups, `set_a` excludes TTL, `set_b` excludes TTL and window, and `set_c` excludes TTL, window, and protocol. The earlier protocol text claiming additive groups has been corrected. These four schemas were compared in the separate binary v3 transfer study; the main multiclass reliability experiment used `set_c` only. See `feature_manifest_nf_unsw_nb15_v3.csv` for the v3 column inventory. Do not carry schema-effect conclusions from the binary transfer task over to multiclass OSR, conformal prediction, or routing.
 
 ## Reproducibility boundary
 

@@ -18,7 +18,7 @@ The paper draft used NF-UNSW-NB15-v2 and NF-CSE-CIC-IDS2018-v2 while claiming ch
 
 ## 2. Population and data lineage
 
-For every dataset, record the source release/version, download URL, file name, SHA-256, file size, acquisition date, schema, row count, label counts, and timestamp interpretation. `run_metadata.json` stores the local file hash and structural audit. For the current v3 file, the exact local checksum, size, schema, and row counts are recorded, and its UQ data-bag identifier is available in the local package metadata; the acquisition/download date has not been independently recorded and must be added before publication.
+For every dataset, record the source release/version, source URL, file name, SHA-256, file size, acquisition date when known, schema, row count, label counts, and timestamp interpretation. `run_metadata.json` stores the local file hash and structural audit. For the analyzed v3 files, checksum, size, schema, row count, and UQ source/bag identifiers are recorded in experiment metadata. The project acquisition date was not recorded; retain it as unknown rather than infer it from bagging or local file timestamps.
 
 The code removes only records satisfying the configured physical-invalidity rules: missing class label, negative numeric duration, or zero/missing total packet count when both packet-count columns exist. Each count is reported. The code does not deduplicate. A sampled exact-duplicate audit is reported as a sample statistic and is never extrapolated into a full-dataset duplicate count.
 
@@ -56,7 +56,7 @@ The model input feature set is determined from column names and dtypes, not from
 - `set_b`: exclude TTL and TCP window fields;
 - `set_c`: exclude TTL, TCP window, and protocol enumeration/identifier fields.
 
-This definition follows the executable contract in `features.py` and its unit test. It replaces the earlier, incorrect wording that described the sets as progressively adding groups. Whether this matches the original manuscript's intended comparison remains unverified; do not describe prior results as an additive feature study unless the original study specification confirms that interpretation.
+This definition follows the executable contract in `features.py` and its unit test. It replaces the earlier, incorrect wording that described the sets as progressively adding groups. The completed transfer/schema analysis uses this code-defined removal direction. Older manuscript wording is superseded; do not describe these results as an additive feature study.
 
 Actual columns removed, present, absent, and retained are stored for every run. Any unexpected non-numeric predictor column causes an explicit error instead of silent deletion.
 

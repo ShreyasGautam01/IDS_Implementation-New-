@@ -62,9 +62,9 @@ This document separates observed facts from interpretations and open decisions. 
 | `set_b` | TTL + window | protocol | set A plus window |
 | `set_c` | TTL + window + protocol | none | set B plus protocol |
 
-The disagreement was confirmed between code and earlier protocol wording. The code, tests, and corrected protocol now agree on the feature-removal interpretation shown in the table. The current paper uses only the `set_c` run as its primary configuration and makes no comparative ablation claim, so recovering an older manuscript's intended schema naming is unnecessary for the paper's current scope.
+The disagreement was confirmed between code and earlier protocol wording. The code, tests, and corrected protocol now agree on the feature-removal interpretation shown in the table. The primary multiclass temporal reliability pipeline uses `set_c`; the separate binary transfer experiment compares all four schemas. These answer different questions and must not be conflated. Recovering an older manuscript's wording is unnecessary because this implementation and protocol define the executed comparison.
 
-Seed 42 metadata confirms the main run used `set_c`, excluded the present `MIN_TTL`, `MAX_TTL`, `TCP_WIN_MAX_IN`, `TCP_WIN_MAX_OUT`, and protocol-group fields, and selected 38 numeric features. Thus, the model's executed feature set is known. The main performance values are observations for that exact 38-feature model. Cross-dataset schema comparisons remain exploratory and require corrected labels/interpretation before use.
+Seed 42 metadata confirms the main run used `set_c`, excluded the present `MIN_TTL`, `MAX_TTL`, `TCP_WIN_MAX_IN`, `TCP_WIN_MAX_OUT`, and protocol-group fields, and selected 38 numeric features. The main multiclass reliability results are observations for that exact feature set. Separately, the binary transfer comparison evaluates all four schemas as specified in `docs/CROSS_DATASET_V3_EXPERIMENT.md`.
 
 The column-by-column manifest is `docs/feature_manifest_nf_unsw_nb15_v3.csv`. Under current code, the v3 data retain 47 predictors for `baseline`, 45 for `set_a`, 43 for `set_b`, and 38 for `set_c`. It identifies label fields, six identifier/time fields, all present configured group members, and the remaining numeric predictors. Configured but absent group members are `STTL`, `DTTL`, `INIT_WIN_BYTES_FWD`, and `INIT_WIN_BYTES_BWD`.
 
@@ -116,6 +116,6 @@ Cross-domain and monotonicity questions are separate experiments. The v3 bidirec
 ## 7. Inputs still useful
 
 - Evidence-backed Methods, Results, Discussion, Limitations, and provisional Abstract/Conclusion sections are drafted in `docs/MANUSCRIPT_DRAFT.md`. The focused literature review and venue formatting remain open.
-- No additional project handoff or manuscript is needed: this repository is the current study record. If feature ablation remains outside the paper's scope, report only the executed `set_c` configuration and make no ablation-effect claim.
+- No additional project handoff or manuscript is needed: this repository is the current study record. Keep the four-schema comparison scoped to the separate binary transfer experiment; the multiclass reliability result is for `set_c` only.
 - The completed v2/v3 transfer and v3 monotonicity outputs are separate protocol experiments; they must not be presented as one end-to-end temporal v3 reliability result.
 - No additional dataset is required to complete the independent audit of the existing four runs. Additional v3 datasets/time periods would be required for broader external/temporal generalization claims.

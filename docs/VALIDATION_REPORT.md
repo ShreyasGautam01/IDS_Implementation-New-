@@ -40,7 +40,7 @@ The statements in the original report below describe the validation state when i
 
 `pyarrow` was not installed in this execution environment. Consequently, the Parquet schema-inspection and Parquet loading paths were not exercised here. CSV parsing, algorithmic units, CLI parsing, and the synthetic end-to-end pipeline were exercised. The GitHub Actions workflow additionally defines tests on Python 3.11 and 3.12, but those remote CI jobs have not been run from this environment.
 
-## Not executed
+## Not executed in the original validation report (historical state)
 
 - No real UQ NetFlow v3 files were supplied to this session.
 - No full-dataset audit, v3 timestamp verification, or v3 model fit was executed.

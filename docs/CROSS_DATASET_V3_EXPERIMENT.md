@@ -27,6 +27,17 @@ Values are means across seeds; the seed-level values are identical in this run.
 
 The in-domain source-test scores were high for UNSW-v3 (macro-F1 0.998–1.000) and weak for CIC-IDS2018-v3 (macro-F1 0.477–0.481). In every zero-shot direction/schema condition, balanced accuracy was at or below 0.500 and MCC was near zero or negative. Thus, strong in-domain performance in one direction did not transfer to the other dataset on these fixed samples. No schema showed a consistent improvement across both directions and all metrics.
 
+| Source in-domain test | Schema | Macro-F1 | Balanced accuracy | MCC |
+|---|---|---:|---:|---:|
+| UNSW-v3 chronological holdout | baseline | 1.000 | 1.000 | 1.000 |
+| UNSW-v3 chronological holdout | set_a | 0.999 | 0.999 | 0.998 |
+| UNSW-v3 chronological holdout | set_b | 0.999 | 1.000 | 0.999 |
+| UNSW-v3 chronological holdout | set_c | 0.998 | 0.998 | 0.996 |
+| CIC-IDS2018-v3 chronological holdout | baseline | 0.477 | 0.500 | -0.006 |
+| CIC-IDS2018-v3 chronological holdout | set_a | 0.477 | 0.500 | -0.006 |
+| CIC-IDS2018-v3 chronological holdout | set_b | 0.481 | 0.502 | 0.032 |
+| CIC-IDS2018-v3 chronological holdout | set_c | 0.477 | 0.500 | -0.006 |
+
 ## Interpretation limits
 
 These results support a bounded, sampled v3 transfer comparison, not full-population transfer estimates or temporal generalization to a future target period. The protocol tests binary labels only. Class imbalance, attack-taxonomy differences, and capture-domain differences are part of the observed transfer setting; the experiment does not isolate which caused the weak transfer. The third available v3 dataset, NF-ToN-IoT-v3, was not included because RQ1 specifies a two-dataset comparison. Adding it would be a separate, broader multi-domain experiment.

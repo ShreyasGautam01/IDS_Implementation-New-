@@ -4,7 +4,7 @@
 
 ## Abstract (provisional)
 
-High closed-set classification accuracy does not by itself establish that an intrusion detection system can identify unreliable predictions. We evaluated a multiclass gradient-boosted IDS together with class-conditional Mahalanobis–Weibull open-set scoring, split-conformal prediction, and a selective routing rule on NF-UNSW-NB15-v3 under a chronological holdout. Four classifier seeds used the same temporal partitions and the same test period. The test set contained 353,889 flows, including only 36 withheld `Worms` flows. Known-class closed-set accuracy ranged from 96.45% to 96.47%, while automated coverage ranged from 68.56% to 69.50%; accuracy among automated flows ranged from 99.75% to 99.80%. The open-set score rejected one of 36 unknown flows and achieved AUROC 0.216, whereas the maximum-probability baseline achieved AUROC between 0.970 and 0.974. Mondrian conformal prediction produced 90.44% overall known-class empirical coverage, but coverage varied substantially by class. The results show that strong aggregate accuracy and selective accuracy can coexist with poor unknown-family detection and uneven class-wise reliability. Conclusions are limited to one dataset, one future test window, and sparse unknown support.
+High closed-set classification accuracy does not by itself establish that an intrusion detection system can identify unreliable predictions. We evaluated a multiclass gradient-boosted IDS together with class-conditional Mahalanobis–Weibull open-set scoring, split-conformal prediction, and selective routing on NF-UNSW-NB15-v3 under a chronological holdout. Four classifier seeds used the same temporal partitions and test period. The test set contained 353,889 flows, including only 36 withheld `Worms` flows. Known-class closed-set accuracy ranged from 96.45% to 96.47%; automated coverage ranged from 68.56% to 69.50%; and automated-subset accuracy ranged from 99.75% to 99.80%. The open-set score rejected one of 36 unknown flows and achieved AUROC 0.216, compared with 0.970–0.974 for maximum probability. Mondrian conformal prediction had 90.44% overall known-class empirical coverage, with substantial class variation. In a separate binary v3 transfer experiment, all four feature schemas produced target balanced accuracy no higher than 0.500 in either direction. A separate seed-42 monotonicity sensitivity retained 99.99% attack recall at the largest specified perturbation, compared with 44.49% for the unconstrained model. These are distinct experiments: the transfer and monotonicity results do not validate the multiclass reliability pipeline. Conclusions are limited by one primary temporal window, sparse unknown support, fixed transfer samples, and a single monotonicity seed.
 
 **Keywords:** network intrusion detection; temporal evaluation; open-set recognition; conformal prediction; selective classification; class imbalance
 
@@ -18,7 +18,7 @@ The broad combination of conformal triage and unseen-attack-family analysis is a
 
 We withhold the `Worms` family from model fitting and compare the open-set score with a maximum-probability baseline. The limited support of that family in the future window (36 test flows) makes the experiment a narrow audit rather than a broad estimate of unknown-attack performance.
 
-The study covers one dataset and one temporal window. It does not establish generalization across datasets, a guaranteed open-set detector, calibrated classifier probabilities, or deployment safety. The reported results include negative evidence: the fitted Weibull score performs poorly on the withheld family, and aggregate routing accuracy masks weak performance for some attack classes.
+The primary reliability study covers one dataset and one temporal window. Separate binary experiments assess four feature schemas in bidirectional transfer and a specified monotonicity sensitivity. Together, these analyses do not establish a new general-purpose method, broad generalization, a guaranteed open-set detector, calibrated classifier probabilities, robustness to arbitrary attacks, or deployment safety. The results include negative evidence: the fitted Weibull score performs poorly on the withheld family, transfer is weak, and aggregate routing accuracy masks weak performance for some attack classes.
 
 ## 2. Methods
 
@@ -158,7 +158,7 @@ The close prior study by Arepalli et al. makes it especially important to state 
 3. **Validation support.** Seven of nine OSR nearest-class regions could not receive fitted rejection thresholds under the minimum-support rule and used no-rejection fallbacks.
 4. **Temporal dependence.** The embargo and complete-flow boundary checks reduce overlap around cut points, but do not rule out campaigns, host sessions, or duplicates spanning periods.
 5. **Conformal exchangeability.** Calibration and test data are temporally separated. Exact split-conformal coverage assumptions have not been established under this temporal shift.
-6. **Single feature configuration.** The primary run uses the executable `set_c` schema. This study does not compare feature ablations, so its results do not establish the effect of removing TTL, TCP-window, or protocol features.
+6. **Feature-schema scope.** The main multiclass reliability pipeline uses `set_c` only. The separate binary transfer experiment compares all four schemas, but its findings do not establish how feature removal affects the multiclass OSR/conformal/routing pipeline.
 7. **No deployment evaluation.** The study does not measure latency, analyst workload, operational safety, line rate, or performance under adaptive attackers.
 8. **Limited replication scope.** Four classifier seeds share the same split and data. They characterize model-seed variation, not variation across time periods or environments. OSR scores are deterministic across those seeds.
 9. **Provenance and literature.** The dataset release, source record, and file checksum are identified, but the project download date was not recorded. The related-work review still needs expansion and verification before submission.
@@ -170,8 +170,7 @@ On one fixed future-time test window from NF-UNSW-NB15-v3, high known-class accu
 
 ## Items to resolve before submission
 
-- Expand the verified starter bibliography into a balanced related-work review of NIDS reliability, open-set detection, and temporal evaluation; confirm the relevant literature before making any novelty claim.
-- Complete the related-work comparison and verify the final reference list against publisher or primary-source records.
+- Complete and verify a balanced related-work review of NIDS reliability, open-set detection, temporal evaluation, transfer, and conformal/selective prediction against publisher or primary-source records before making a novelty claim.
 - Confirm the dataset citation format required by the selected venue; keep the acquisition date unstated because it is not recorded.
 - Review the figures against the selected venue’s formatting requirements and confirm it permits reporting seed SDs for this fixed split; add supplementary figures only if they answer a distinct paper question.
 - Verify all descriptions against the final selected venue's reporting requirements.

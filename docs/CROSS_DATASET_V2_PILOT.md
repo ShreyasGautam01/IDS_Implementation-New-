@@ -25,4 +25,4 @@ Target metrics below are means over the four seeds. MCC is included to show perf
 
 The pilot shows weak and direction-dependent zero-shot transfer on these fixed samples. In the UNSW-to-CIC direction, two removal schemas have negative MCC. In the reverse direction, all schemas are near zero MCC and balanced accuracy is near 0.5. These results do not support a general transferability claim. Because the source split is random rather than chronological, they say nothing about future-time domain transfer. The 10,000-row samples limit precision and population coverage; do not present them as full-dataset estimates.
 
-Feature labels above follow the executable code and unit-test contract. The original manuscript's intended ablation direction still needs confirmation from its source specification.
+Feature labels above follow the executable code and unit-test contract: these are removal ablations. The same code-defined schemas are also used in the separate v3 transfer experiment; neither transfer study determines feature effects for the multiclass reliability pipeline.
