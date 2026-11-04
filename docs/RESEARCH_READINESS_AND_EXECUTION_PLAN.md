@@ -5,7 +5,7 @@
 **Audit branch:** `research/baseline-audit`  
 **Uploaded experiment snapshot:** `codex/ids-project-upload` at `ee1ffd0` (preserved; do not rewrite)
 
-This document separates observed facts from interpretations and open decisions. No new model experiment was started during this baseline audit.
+This document separates observed facts from interpretations and open decisions. The locked four-seed pipeline was regenerated under the same data, split, and model settings solely to preserve pre-OSR class predictions in each export. This was a reproducibility refresh, not a new protocol or hyperparameter experiment.
 
 ## 1. Current project and repository state
 
@@ -33,13 +33,14 @@ This document separates observed facts from interpretations and open decisions. 
 - EVT rejects 1/36 unknown rows in each seed (2.78%; AUROC 0.216). Max-probability baseline AUROC is 0.970–0.974. The weak EVT result is a primary finding and must remain visible.
 - Only two of nine nearest-class OSR regions use validation-fitted thresholds; seven use the predeclared no-rejection fallback due to insufficient validation support.
 - Four-seed metrics are summarized in `artifacts_rebuilt/EXPERIMENT_RESULTS.md` and `artifacts_rebuilt/multi_seed_summary.csv`. Detailed run artifacts exist locally under timestamped seed directories. These detailed artifacts have not been uploaded.
+- The four locked seeds were regenerated with the updated prediction exporter under `artifacts_reexport/`: `20261104T054008460933Z_seed42`, `20261104T054436806041Z_seed43`, `20261104T054840547477Z_seed44`, and `20261104T055304601532Z_seed45`. For every seed, global metrics, dataset-file metadata, and temporal-split metadata exactly match the original run. Each new prediction export has 353,889 rows and preserves the closed-set top-1 class before OSR. SHA-256 hashes and sizes for the new prediction/metadata files are recorded in `docs/REEXPORT_MANIFEST.csv`. The large local artifacts are intentionally excluded from GitHub; the code and reproduction notes are published.
 - A bounded binary cross-dataset pilot ran on the two supplied v2 datasets, with 10,000-row disjoint source and target samples per dataset, four seeds (42–45), four code-defined removal schemas, and both directions. Because v2 has no configured flow timestamps, source evaluation uses the explicit stratified-random fallback. It is not temporal evidence. No real-data monotonicity experiment has been verified as run.
 
 ### Independent reproduction status
 
 - Recomputed from all four `test_predictions.csv` files: unknown prevalence/count, EVT and max-probability AUROC/AUPR, OSR detection and known false-rejection rates, automated coverage and accepted-subset accuracy, and known-class conformal coverage. These match run metadata/comparison files at full floating-point precision for the checked metrics.
 - Recomputed cross-run identity checks: same dataset checksum, config, boundaries, test class counts, test row count, and row-ordered true labels across all seeds.
-- The completed-run prediction exports do not independently recover closed-set top-1 accuracy for OSR-rejected rows: they store `predicted_class_id=-1` without the pre-OSR class. The exporter has now been updated to include `closed_set_predicted_class_id` and its label in newly generated outputs. This code change does not retroactively repair the completed run artifacts; a rerun is needed to create a fully auditable prediction export.
+- The original completed-run CSVs do not independently recover closed-set top-1 accuracy for OSR-rejected rows. In each regenerated export, closed-set accuracy recomputed directly from `true_class_id` and `closed_set_predicted_class_id` matches `run_metadata.json` exactly. The original run files remain unchanged.
 - Detailed per-class conformal coverage, tail-size sensitivity, threshold fallbacks, and routing rates have been summarized in `docs/RELIABILITY_DIAGNOSTICS.md`.
 
 ## 3. Feature-ablation discrepancy (confirmed)
@@ -63,7 +64,7 @@ The column-by-column manifest is `docs/feature_manifest_nf_unsw_nb15_v3.csv`. Un
 
 Core OSR/routing metrics were recomputed from each saved `test_predictions.csv` using `true_class_id`, stored scores, stored OSR decisions, and stored routes. For seeds 42–45, recomputed EVT AUROC/AUPR, max-probability AUROC/AUPR, OSR detection/FPR, automation coverage, and automated-subset accuracy exactly match metadata (absolute difference 0 at displayed precision). Known-class conformal coverage recomputed from the saved class p-values is 0.9044, 0.9030, 0.9065, and 0.9037, matching the saved comparison outputs.
 
-The predictions do not contain a separate closed-set top-1 class for rows rejected by OSR; `predicted_class_id` is replaced with -1 on those rows. Therefore closed-set accuracy cannot be independently recomputed solely from the current prediction CSVs. It can be checked by reproducing model inference from the data, config, and code, or the export schema can be improved in a new version. Do not describe unavailable independent recomputation as completed.
+The original predictions do not contain a separate closed-set top-1 class for rows rejected by OSR; `predicted_class_id` is replaced with -1 on those rows. The refreshed predictions contain `closed_set_predicted_class_id` and `closed_set_predicted_class`. For each of seeds 42–45, closed-set accuracy computed directly from the CSV for known-class rows is exactly equal to the metadata value. The regenerated run metadata also matches the original global metrics, dataset-file metadata, and temporal split exactly.
 
 An additional cross-run integrity check confirms all four runs have identical source hashes, config snapshots, boundaries, test class counts, row counts, and row-ordered true labels. OSR scores and rejection flags are exactly identical across seeds because the OSR method is deterministic and does not use the classifier's random seed. Thus the four seeds quantify model-seed variability for classification/conformal/routing, but do **not** provide repeated independent OSR replications. Report the OSR outcome once for this fixed split (with 36 unknown rows); do not imply zero uncertainty from its zero across-seed standard deviation.
 
@@ -87,7 +88,7 @@ Cross-domain and monotonicity questions are separate studies; the available v2 t
 1. Recover/locate the exact v2.1.2 archive/source and any current-study manuscript/specification if available; compare version/method definitions and confirm the manuscript's intended feature ablation. The legacy IEEE package above is not that specification.
 2. Build a manuscript claim-to-evidence map once the paper draft is available. Do not carry forward legacy numbers without exact provenance.
 3. Decide whether more datasets or a newly predeclared test design are needed for broader claims. Any new design after current test inspection must be marked exploratory or separately confirmatory.
-4. Rerun the locked experiment with the updated exporter if artifact-only reproduction of closed-set metrics is required; the new output schema preserves pre-OSR classifier top-1 labels.
+4. The locked four-seed rerun with the updated exporter is complete. Keep the regenerated output folders and their checksums available with the research archive if per-flow auditability is needed.
 5. Record the actual dataset download/acquisition date and source citation in the provenance manifest; the UQ bagging date is not the project download date.
 6. Run the real-data monotonicity experiment only if that research question remains in scope; otherwise explicitly omit empirical monotonicity results from the paper.
 7. Once open provenance/specification inputs are resolved, freeze paper tables and draft methods, results, interpretation, discussion, and limitations from artifacts.
