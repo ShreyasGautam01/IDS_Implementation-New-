@@ -48,7 +48,7 @@ This document separates observed facts from interpretations and open decisions. 
 
 - Figure 1 is now generated at `docs/figures/figure1_classwise_reliability.svg`. It displays class-wise empirical Mondrian coverage and autonomous acceptance, test support, the nominal 90% reference, and sample-SD whiskers across the four classifier seeds on the same fixed split.
 - Its source, structured summary data, and design specification are `scripts/plot_classwise_reliability.py`, `docs/figures/figure1_classwise_reliability_data.csv`, and `docs/figures/figure1_classwise_reliability_spec.json`. The manuscript caption is included in `docs/MANUSCRIPT_DRAFT.md`.
-- The SVG parsed as valid XML and its declared 178 × 130 mm dimensions, class labels, and key annotations were checked. Pixel-level final-size and grayscale inspection remains open: local-file preview was denied by the browser policy, and the environment lacks a local SVG rasterizer. Treat Figure 1 as a generated draft pending visual review, not as final publication artwork.
+- Figures 1 and 2 were checked as valid SVG and previewed at their declared physical dimensions (178 × 140 mm and 178 × 90 mm). Native-render previews were inspected in color and grayscale. Figure 1 was revised after review to add the missing percentage-axis label and give the legend/notes more clearance; class supports, whiskers, chance/target references, and captions are visible without clipping. Marker shapes preserve distinction in grayscale. The outputs are editable vector drafts; venue-specific final formatting remains open.
 
 ## 3. Feature-ablation discrepancy (confirmed)
 
@@ -99,7 +99,7 @@ Cross-domain and monotonicity questions are separate studies; the available v2 t
 5. The locked four-seed rerun with the updated exporter is complete. Keep the regenerated output folders and their checksums available with the research archive if per-flow auditability is needed.
 6. Record the actual dataset download/acquisition date and source citation in the provenance manifest; the UQ bagging date is not the project download date.
 7. Run the real-data monotonicity experiment only if that research question remains in scope; otherwise explicitly omit empirical monotonicity results from the paper.
-8. Complete visual and grayscale inspection of Figures 1–2, then produce any remaining result figures from the locked outputs and keep their plotted values linked to source CSVs.
+8. Decide from the selected venue and remaining results whether supplementary figures are needed; derive them only from locked outputs and preserve their plotted values alongside source CSVs.
 9. Once open provenance/specification inputs are resolved, freeze paper tables and draft methods, results, interpretation, discussion, and limitations from artifacts.
 
 ## 6. Acceptance criteria before final paper results

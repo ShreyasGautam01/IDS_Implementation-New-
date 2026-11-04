@@ -47,24 +47,24 @@ spec = {
     "unit": "percent",
     "category_order": ORDER,
     "target_width_mm": 178,
-    "target_height_mm": 130,
+    "target_height_mm": 140,
     "uncertainty": "mean ± sample standard deviation across four classifier seeds on one fixed temporal split; not a confidence interval",
     "annotation_plan": ["nominal 90% Mondrian target reference", "per-class test support"],
     "output": "SVG vector figure",
 }
 (OUT / "figure1_classwise_reliability_spec.json").write_text(json.dumps(spec, indent=2) + "\n", encoding="utf-8")
 
-# Final physical dimensions are 178 x 118 mm (viewBox uses CSS px at 96 dpi).
-W, H = 672.76, 491.34
+# Final physical dimensions are 178 x 140 mm (viewBox uses CSS px at 96 dpi).
+W, H = 672.76, 529.13
 x0, x1 = 250.0, 642.0
 y0, step = 146.0, 29.0
 scale = lambda value: x0 + (x1 - x0) * value / 100.0
 esc = lambda text: html.escape(str(text), quote=True)
-parts = [f'<svg xmlns="http://www.w3.org/2000/svg" width="178mm" height="130mm" viewBox="0 0 {W} {H}" role="img" aria-labelledby="title desc">',
+parts = [f'<svg xmlns="http://www.w3.org/2000/svg" width="178mm" height="140mm" viewBox="0 0 {W} {H}" role="img" aria-labelledby="title desc">',
  '<title id="title">Class-wise coverage and automation diverge</title>',
  '<desc id="desc">Paired point and sample-standard-deviation intervals for Mondrian conformal coverage and autonomous acceptance in each class. Supports are shown at left. The dashed line marks the 90 percent conformal target.</desc>',
  '<rect width="100%" height="100%" fill="#FFFFFF"/>',
- '<style>text{font-family:Arial,Helvetica,Inter,"DejaVu Sans",sans-serif;fill:#171717}.muted{fill:#5E6462}.grid{stroke:#E8E8E5;stroke-width:1}.axis{stroke:#AEB3B0;stroke-width:1}.teal{stroke:#1F6F5F;fill:#1F6F5F}.auto{stroke:#555B59;fill:#555B59}.whisker{stroke-width:1.35;stroke-linecap:round}.tick{font-size:11px}.label{font-size:11.3px}.support{font-size:10.4px}</style>',
+ '<style>text{font-family:Arial,Helvetica,Inter,"DejaVu Sans",sans-serif;fill:#171717}.muted{fill:#5E6462}.grid{stroke:#E8E8E5;stroke-width:1}.axis{stroke:#AEB3B0;stroke-width:1}.teal{stroke:#1F6F5F;fill:#1F6F5F}.auto{stroke:#555B59;fill:#555B59}.whisker{stroke-width:1.35;stroke-linecap:round}.tick{font-size:11px}.label{font-size:11.3px}.support{font-size:10.8px}</style>',
  '<text x="18" y="27" font-size="14" font-weight="600">Class-wise coverage and automation diverge</text>',
  '<text class="muted" x="18" y="48" font-size="10.7">Points show four-seed means; whiskers show sample SD on the same fixed split.</text>',
  '<text class="muted" x="18" y="126" font-size="10">Class</text>',
@@ -74,7 +74,7 @@ for tick in (0, 25, 50, 75, 100):
     parts.append(f'<line class="grid" x1="{x:.2f}" y1="{y0-9}" x2="{x:.2f}" y2="{y0+9*step+9}"/>')
     parts.append(f'<text class="tick muted" x="{x:.2f}" y="{y0+9*step+27}" text-anchor="middle">{tick}</text>')
 parts.append(f'<line x1="{scale(90):.2f}" y1="{y0-9}" x2="{scale(90):.2f}" y2="{y0+9*step+9}" stroke="#9A681A" stroke-width="1.15" stroke-dasharray="4 3"/>')
-parts.append(f'<text x="{scale(90)+4:.2f}" y="{y0-15}" fill="#805716" font-size="9.5">90% target</text>')
+parts.append(f'<text x="{scale(90)+4:.2f}" y="{y0-15}" fill="#805716" font-size="10">90% target</text>')
 for i, row in enumerate(rows):
     yy = y0 + i * step
     name = DISPLAY.get(row["class"], row["class"])
@@ -95,10 +95,11 @@ for i, row in enumerate(rows):
               f'<line class="auto" x1="{right:.2f}" y1="{ay-3:.2f}" x2="{right:.2f}" y2="{ay+3:.2f}"/>',
               f'<rect class="auto" x="{scale(mean)-2.8:.2f}" y="{ay-2.8:.2f}" width="5.6" height="5.6"/>']
 parts += [f'<line class="axis" x1="{x0}" y1="{y0+9*step+9}" x2="{x1}" y2="{y0+9*step+9}"/>',
- '<circle cx="260" cy="456" r="3.2" fill="#1F6F5F"/><text class="muted" x="269" y="460" font-size="10.2">Mondrian coverage</text>',
- '<rect x="408" y="453.2" width="5.6" height="5.6" fill="#555B59"/><text class="muted" x="420" y="460" font-size="10.2">Autonomous acceptance</text>',
- '<text class="muted" x="18" y="477" font-size="9.5">Held-out Worms has no conformal-coverage estimate; 36/36 were routed away from automation.</text>',
- '<text class="muted" x="18" y="488" font-size="9.5">Seed SD is not uncertainty across periods or datasets. Higher acceptance is not inherently better.</text>',
+ '<text class="muted" x="446" y="452" text-anchor="middle" font-size="10.2">Test flows (%)</text>',
+ '<circle cx="260" cy="478" r="3.2" fill="#1F6F5F"/><text class="muted" x="269" y="482" font-size="10.2">Mondrian coverage</text>',
+ '<rect x="408" y="475.2" width="5.6" height="5.6" fill="#555B59"/><text class="muted" x="420" y="482" font-size="10.2">Autonomous acceptance</text>',
+ '<text class="muted" x="18" y="506" font-size="10">Held-out Worms has no conformal-coverage estimate; 36/36 were routed away from automation.</text>',
+ '<text class="muted" x="18" y="519" font-size="10">Seed SD is not uncertainty across periods or datasets. Higher acceptance is not inherently better.</text>',
  '</svg>']
 (OUT / "figure1_classwise_reliability.svg").write_text("\n".join(parts) + "\n", encoding="utf-8")
 print(f"Wrote data and SVG from seeds {sorted(run_data)}")

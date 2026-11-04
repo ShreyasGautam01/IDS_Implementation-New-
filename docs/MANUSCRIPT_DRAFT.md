@@ -163,7 +163,7 @@ On one fixed future-time test window from NF-UNSW-NB15-v3, high known-class accu
 - Expand the verified starter bibliography into a balanced related-work review of NIDS reliability, open-set detection, and temporal evaluation; confirm the relevant literature before making any novelty claim.
 - Recover the current-study manuscript or authoritative feature-ablation specification.
 - Confirm the dataset acquisition date and complete citation/metadata.
-- Produce publication-ready figures from the verified outputs and confirm that the selected venue permits reporting seed SDs for this fixed split.
+- Review the figures against the selected venue’s formatting requirements and confirm it permits reporting seed SDs for this fixed split; add supplementary figures only if they answer a distinct paper question.
 - Verify all descriptions against the final selected venue's reporting requirements.
 
 ## References (verified starter set; expand before submission)

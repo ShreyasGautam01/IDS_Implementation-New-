@@ -5,7 +5,7 @@
   "unit": "unitless (0 to 1)",
   "higher_is_better": true,
   "target_width_mm": 178,
-  "target_height_mm": 85,
+  "target_height_mm": 90,
   "uncertainty": "Maximum-probability sample SD across four seeds on one fixed split; not a confidence interval. EVT score is deterministic and identical across seeds.",
   "support": "36 withheld Worms flows; 353,853 known flows",
   "output": "SVG vector figure"
