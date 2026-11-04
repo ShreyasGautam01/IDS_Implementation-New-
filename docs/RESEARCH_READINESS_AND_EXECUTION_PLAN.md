@@ -16,6 +16,7 @@ This document separates observed facts from interpretations and open decisions. 
 - The local older package `D:\ResearchPaper\IDS_Reliability_Benchmark_Rework_Package\ids_rework_v2` exists. The handoff's separate v2.1.2 archive/source was not located during this audit and cannot currently be compared.
 - A legacy IEEE final package was found at `D:\ResearchPaper\IDS_Reliability_Benchmark_IEEE_Final_Package.zip`. Its manuscript is titled “Beyond Accuracy: Benchmarking Lightweight Reliability Signals for Intrusion Detection Under Unseen Attacks and Distribution Shift.” It describes a different study: a binary Random Forest benchmark on UNSW-NB15 and CIC-IDS2017, with raw confidence, tree disagreement, distance, conformal prediction, withheld-family tests, and cross-dataset shift. It is useful evidence of the project's earlier motivation, but it is not the current GBDT/Mahalanobis–Weibull v3 study specification.
 - The legacy manuscript's stated gap is that closed-set accuracy does not tell operators when predictions are unreliable, and that lightweight reliability signals had not been compared across distinct failure modes (ordinary errors, withheld attack families, and cross-dataset shift) in a controlled benchmark. Its stated contribution and results must not be attributed to the current v3 experiment.
+- A direct recent prior study, Arepalli et al., “Conformal prediction for network intrusion triage and analysis of unseen attack families,” was published on 2026-11-02. It evaluates conformal triage and family-wise probability/distance novelty on UNSW-NB15 and CIC-IDS2017 across 15 leave-one-family-out runs, and includes a separate weekday-based temporal CIC-IDS2017 analysis. This substantially overlaps the project's broad motivation and combined reliability scope; the current study must be positioned as a narrower NF-UNSW-NB15-v3 temporal-protocol extension, not as the first combined reliability/unknown-family evaluation.
 - The NF-UNSW-NB15-v3 source file and four seed run folders are available locally. Raw datasets and large per-flow prediction outputs are excluded from the uploaded commit.
 
 ### Open
@@ -70,9 +71,9 @@ An additional cross-run integrity check confirms all four runs have identical so
 
 ## 4. Research gap and current research questions
 
-The earlier IEEE manuscript frames the broad motivation as a gap between ordinary closed-set accuracy and the operational need to identify unreliable predictions, with reliability signals compared across ordinary errors, withheld attack families, and cross-dataset shift. The current implementation is materially different, so that earlier paper is context—not an authoritative specification or validation of this study.
+The earlier IEEE manuscript frames the broad motivation as a gap between ordinary closed-set accuracy and the operational need to identify unreliable predictions, with reliability signals compared across ordinary errors, withheld attack families, and cross-dataset shift. More recent direct work by Arepalli et al. already evaluates conformal triage and unseen attack families across two datasets, including temporal evaluation. The broad gap has therefore been addressed and should not be claimed as novel.
 
-For the current v3 experiment, the defensible narrower gap/question is whether the implemented GBDT reliability pipeline (class-conditional Mahalanobis–Weibull OSR, conformal prediction, and selective routing) remains informative on a fixed future-time split with severe class imbalance and very sparse withheld-family support. The evidence covers one dataset and one chronological test window. It does not establish broad reliability across datasets or time periods, and the weak EVT outcome must be treated as a central negative result.
+For the current v3 experiment, the defensible question is how the implemented GBDT reliability pipeline (class-conditional Mahalanobis–Weibull OSR, conformal prediction, and selective routing) behaves on a fixed future-time split of the temporal NF-UNSW-NB15-v3 release, with complete-flow interval boundary checks and a rare withheld family. This is a narrow protocol- and dataset-specific extension to the recent direct study, not evidence of a general literature gap. It covers one dataset and one chronological test window, does not establish broad reliability across datasets or periods, and the weak EVT outcome must remain central.
 
 Current evidence-bearing questions are:
 
@@ -85,13 +86,14 @@ Cross-domain and monotonicity questions are separate studies; the available v2 t
 
 ## 5. Immediate audit and implementation tasks
 
-1. Recover/locate the exact v2.1.2 archive/source and any current-study manuscript/specification if available; compare version/method definitions and confirm the manuscript's intended feature ablation. The legacy IEEE package above is not that specification.
-2. Use `docs/MANUSCRIPT_EVIDENCE_MAP.md` as the current claim-to-evidence map. Verify the background bibliography and novelty against primary sources before submission; do not carry forward legacy numbers without exact provenance.
-3. Decide whether more datasets or a newly predeclared test design are needed for broader claims. Any new design after current test inspection must be marked exploratory or separately confirmatory.
-4. The locked four-seed rerun with the updated exporter is complete. Keep the regenerated output folders and their checksums available with the research archive if per-flow auditability is needed.
-5. Record the actual dataset download/acquisition date and source citation in the provenance manifest; the UQ bagging date is not the project download date.
-6. Run the real-data monotonicity experiment only if that research question remains in scope; otherwise explicitly omit empirical monotonicity results from the paper.
-7. Once open provenance/specification inputs are resolved, freeze paper tables and draft methods, results, interpretation, discussion, and limitations from artifacts.
+1. Compare the draft and protocol against Arepalli et al. (2026) and its closely related references; state the narrow temporal-v3 extension precisely and avoid a broad novelty claim.
+2. Recover/locate the exact v2.1.2 archive/source and any current-study manuscript/specification if available; compare version/method definitions and confirm the manuscript's intended feature ablation. The legacy IEEE package above is not that specification.
+3. Use `docs/MANUSCRIPT_EVIDENCE_MAP.md` as the current claim-to-evidence map. Verify the background bibliography and novelty against primary sources before submission; do not carry forward legacy numbers without exact provenance.
+4. Decide whether more datasets or a newly predeclared test design are needed for broader claims. Any new design after current test inspection must be marked exploratory or separately confirmatory.
+5. The locked four-seed rerun with the updated exporter is complete. Keep the regenerated output folders and their checksums available with the research archive if per-flow auditability is needed.
+6. Record the actual dataset download/acquisition date and source citation in the provenance manifest; the UQ bagging date is not the project download date.
+7. Run the real-data monotonicity experiment only if that research question remains in scope; otherwise explicitly omit empirical monotonicity results from the paper.
+8. Once open provenance/specification inputs are resolved, freeze paper tables and draft methods, results, interpretation, discussion, and limitations from artifacts.
 
 ## 6. Acceptance criteria before final paper results
 

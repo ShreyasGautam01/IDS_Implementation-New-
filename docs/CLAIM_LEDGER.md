@@ -4,6 +4,8 @@
 
 The manuscript inside `D:\ResearchPaper\IDS_Reliability_Benchmark_IEEE_Final_Package.zip` is a separate, earlier binary Random Forest study using UNSW-NB15 and CIC-IDS2017. Its motivation—accuracy alone does not expose unreliable predictions, and reliability signals should be compared across distinct failure modes—may be cited as historical project context after bibliographic verification. Its methods, numerical results, and specific claimed gap are not evidence for the current NF-UNSW-NB15-v3 GBDT/Mahalanobis–Weibull experiment. The current study's research question must be justified independently and limited to the experiment actually run.
 
+A directly related article by Arepalli et al., “Conformal prediction for network intrusion triage and analysis of unseen attack families” (*Discover Informatics*, 2026; DOI 10.1007/s44564-026-00033-y), was published on 2026-11-02. It evaluates conformal triage and unseen-family novelty across UNSW-NB15 and CIC-IDS2017, including a weekday-based temporal analysis. Do not claim that conformal triage plus unseen-attack evaluation is itself a novel contribution. Position the present work only as a narrow empirical extension on NF-UNSW-NB15-v3 with ordered temporal partitions, complete-flow interval boundary checks, an embargo, and sparse `Worms` support; even that distinction requires complete comparison with the related paper and literature.
+
 This ledger is the contract between implementation, experiments, metrics, and manuscript language. A claim may be promoted only when the named artifact exists and passes the acceptance criteria.
 
 | Topic | What the code computes | Permitted wording | Prohibited wording / condition |
