@@ -40,7 +40,7 @@ This comparison motivates the limited scope of the contribution. It does not est
 
 ### 2.2 Dataset and label construction
 
-We used the local `NF-UNSW-NB15-v3.csv` file identified in the run metadata by SHA-256 `4ebb97bd74412d566137d95a6fc3ffd8f374f1cf8cfe204d007848e7a668f9b5` and size 577,360,958 bytes. The analyzed file contains 2,365,424 flows [1]. The dataset acquisition date was not recorded and must be added from provenance records before publication.
+We used the local `NF-UNSW-NB15-v3.csv` file identified in the run metadata by SHA-256 `4ebb97bd74412d566137d95a6fc3ffd8f374f1cf8cfe204d007848e7a668f9b5` and size 577,360,958 bytes. The analyzed file contains 2,365,424 flows [1]. The dataset acquisition date was not recorded. The UQ data-bag metadata (`bag-info.txt`; [dataset record](https://espace.library.uq.edu.au/view/UQ:6e0eda1)) gives a bagging date of 2025-02-28, while current NTFS metadata records the outer bag folder created on 2026-11-03 14:39:26 UTC and the CSV last written at 14:39:33 UTC. These filesystem timestamps could reflect copying or extraction and are not treated as a confirmed download date; the acquisition date remains an open provenance item.
 
 `Benign` was encoded as class 0; eight known attack categories were encoded as classes 1–8. `Worms` was withheld from all fitted stages and encoded as unknown. The complete file contained 158 `Worms` flows. The time protocol excluded 122 that occurred before the final test window, leaving 36 unknown flows in the test set.
 
@@ -168,7 +168,7 @@ On one fixed future-time test window from NF-UNSW-NB15-v3, high known-class accu
 
 ## References (verified starter set; expand before submission)
 
-1. University of Queensland, “ML-Based NIDS Datasets,” dataset catalogue and NF-UNSW-NB15-v3 entry, accessed 4 November 2026. [https://staff.itee.uq.edu.au/marius/NIDS_datasets/](https://staff.itee.uq.edu.au/marius/NIDS_datasets/)
+1. University of Queensland, “ML-Based NIDS Datasets,” dataset catalogue and NF-UNSW-NB15-v3 entry; UQ eSpace bag record [UQ:6e0eda1](https://espace.library.uq.edu.au/view/UQ:6e0eda1), accessed 4 November 2026. [Dataset catalogue](https://staff.itee.uq.edu.au/marius/NIDS_datasets/)
 2. M. Luay, S. Layeghy, N. Noorbin, M. Sarhan, G. Kulatilleke, N. Moustafa, and M. Portmann, “Time Matters: Temporal NetFlow Features for ML-Based Network Intrusion Detection,” *IEEE Access*, vol. 14, pp. 66899–66913, 2026, doi: [10.1109/ACCESS.2026.3688204](https://doi.org/10.1109/ACCESS.2026.3688204).
 3. N. Moustafa and J. Slay, “UNSW-NB15: A comprehensive data set for network intrusion detection systems (UNSW-NB15 network data set),” in *2015 Military Communications and Information Systems Conference (MilCIS)*, 2015, pp. 1–6, doi: [10.1109/MilCIS.2015.7348942](https://doi.org/10.1109/MilCIS.2015.7348942).
 4. A. Bendale and T. E. Boult, “Towards Open Set Deep Networks,” in *Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)*, 2016, pp. 1563–1572, doi: [10.1109/CVPR.2016.173](https://doi.org/10.1109/CVPR.2016.173).
