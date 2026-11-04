@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="178mm" height="130mm" viewBox="0 0 672.76 491.34" role="img" aria-labelledby="title desc">
+<title id="title">Class-wise coverage and automation diverge</title>
+<desc id="desc">Paired point and sample-standard-deviation intervals for Mondrian conformal coverage and autonomous acceptance in each class. Supports are shown at left. The dashed line marks the 90 percent conformal target.</desc>
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<style>text{font-family:Arial,Helvetica,Inter,"DejaVu Sans",sans-serif;fill:#171717}.muted{fill:#5E6462}.grid{stroke:#E8E8E5;stroke-width:1}.axis{stroke:#AEB3B0;stroke-width:1}.teal{stroke:#1F6F5F;fill:#1F6F5F}.auto{stroke:#555B59;fill:#555B59}.whisker{stroke-width:1.35;stroke-linecap:round}.tick{font-size:11px}.label{font-size:11.3px}.support{font-size:10.4px}</style>
+<text x="18" y="27" font-size="14" font-weight="600">Class-wise coverage and automation diverge</text>
+<text class="muted" x="18" y="48" font-size="10.7">Points show four-seed means; whiskers show sample SD on the same fixed split.</text>
+<text class="muted" x="18" y="126" font-size="10">Class</text>
+<text class="muted" x="218" y="126" text-anchor="end" font-size="10">Test n</text>
+<line class="grid" x1="250.00" y1="137.0" x2="250.00" y2="416.0"/>
+<text class="tick muted" x="250.00" y="434.0" text-anchor="middle">0</text>
+<line class="grid" x1="348.00" y1="137.0" x2="348.00" y2="416.0"/>
+<text class="tick muted" x="348.00" y="434.0" text-anchor="middle">25</text>
+<line class="grid" x1="446.00" y1="137.0" x2="446.00" y2="416.0"/>
+<text class="tick muted" x="446.00" y="434.0" text-anchor="middle">50</text>
+<line class="grid" x1="544.00" y1="137.0" x2="544.00" y2="416.0"/>
+<text class="tick muted" x="544.00" y="434.0" text-anchor="middle">75</text>
+<line class="grid" x1="642.00" y1="137.0" x2="642.00" y2="416.0"/>
+<text class="tick muted" x="642.00" y="434.0" text-anchor="middle">100</text>
+<line x1="602.80" y1="137.0" x2="602.80" y2="416.0" stroke="#9A681A" stroke-width="1.15" stroke-dasharray="4 3"/>
+<text x="606.80" y="131.0" fill="#805716" font-size="9.5">90% target</text>
+<text class="label" x="18" y="150.00">Benign</text>
+<text class="support" x="218" y="150.00" text-anchor="end">322,809</text>
+<line class="teal whisker" x1="604.13" y1="141.70" x2="605.46" y2="141.70"/>
+<line class="teal" x1="604.13" y1="138.70" x2="604.13" y2="144.70"/>
+<line class="teal" x1="605.46" y1="138.70" x2="605.46" y2="144.70"/>
+<circle class="teal" cx="604.80" cy="141.70" r="3.2"/>
+<line class="auto whisker" x1="539.51" y1="150.30" x2="542.90" y2="150.30"/>
+<line class="auto" x1="539.51" y1="147.30" x2="539.51" y2="153.30"/>
+<line class="auto" x1="542.90" y1="147.30" x2="542.90" y2="153.30"/>
+<rect class="auto" x="538.40" y="147.50" width="5.6" height="5.6"/>
+<text class="label" x="18" y="179.00">Analysis</text>
+<text class="support" x="218" y="179.00" text-anchor="end">294</text>
+<line class="teal whisker" x1="492.26" y1="170.70" x2="505.74" y2="170.70"/>
+<line class="teal" x1="492.26" y1="167.70" x2="492.26" y2="173.70"/>
+<line class="teal" x1="505.74" y1="167.70" x2="505.74" y2="173.70"/>
+<circle class="teal" cx="499.00" cy="170.70" r="3.2"/>
+<line class="auto whisker" x1="287.67" y1="179.30" x2="299.67" y2="179.30"/>
+<line class="auto" x1="287.67" y1="176.30" x2="287.67" y2="182.30"/>
+<line class="auto" x1="299.67" y1="176.30" x2="299.67" y2="182.30"/>
+<rect class="auto" x="290.87" y="176.50" width="5.6" height="5.6"/>
+<text class="label" x="18" y="208.00">Backdoor</text>
+<text class="support" x="218" y="208.00" text-anchor="end">1,260</text>
+<line class="teal whisker" x1="421.80" y1="199.70" x2="463.36" y2="199.70"/>
+<line class="teal" x1="421.80" y1="196.70" x2="421.80" y2="202.70"/>
+<line class="teal" x1="463.36" y1="196.70" x2="463.36" y2="202.70"/>
+<circle class="teal" cx="442.58" cy="199.70" r="3.2"/>
+<line class="auto whisker" x1="330.59" y1="208.30" x2="337.73" y2="208.30"/>
+<line class="auto" x1="330.59" y1="205.30" x2="330.59" y2="211.30"/>
+<line class="auto" x1="337.73" y1="205.30" x2="337.73" y2="211.30"/>
+<rect class="auto" x="331.36" y="205.50" width="5.6" height="5.6"/>
+<text class="label" x="18" y="237.00">DoS</text>
+<text class="support" x="218" y="237.00" text-anchor="end">1,234</text>
+<line class="teal whisker" x1="611.55" y1="228.70" x2="622.73" y2="228.70"/>
+<line class="teal" x1="611.55" y1="225.70" x2="611.55" y2="231.70"/>
+<line class="teal" x1="622.73" y1="225.70" x2="622.73" y2="231.70"/>
+<circle class="teal" cx="617.14" cy="228.70" r="3.2"/>
+<line class="auto whisker" x1="267.38" y1="237.30" x2="276.30" y2="237.30"/>
+<line class="auto" x1="267.38" y1="234.30" x2="267.38" y2="240.30"/>
+<line class="auto" x1="276.30" y1="234.30" x2="276.30" y2="240.30"/>
+<rect class="auto" x="269.04" y="234.50" width="5.6" height="5.6"/>
+<text class="label" x="18" y="266.00">Exploits</text>
+<text class="support" x="218" y="266.00" text-anchor="end">10,803</text>
+<line class="teal whisker" x1="614.21" y1="257.70" x2="615.63" y2="257.70"/>
+<line class="teal" x1="614.21" y1="254.70" x2="614.21" y2="260.70"/>
+<line class="teal" x1="615.63" y1="254.70" x2="615.63" y2="260.70"/>
+<circle class="teal" cx="614.92" cy="257.70" r="3.2"/>
+<line class="auto whisker" x1="258.10" y1="266.30" x2="267.46" y2="266.30"/>
+<line class="auto" x1="258.10" y1="263.30" x2="258.10" y2="269.30"/>
+<line class="auto" x1="267.46" y1="263.30" x2="267.46" y2="269.30"/>
+<rect class="auto" x="259.98" y="263.50" width="5.6" height="5.6"/>
+<text class="label" x="18" y="295.00">Fuzzers</text>
+<text class="support" x="218" y="295.00" text-anchor="end">7,387</text>
+<line class="teal whisker" x1="606.08" y1="286.70" x2="607.21" y2="286.70"/>
+<line class="teal" x1="606.08" y1="283.70" x2="606.08" y2="289.70"/>
+<line class="teal" x1="607.21" y1="283.70" x2="607.21" y2="289.70"/>
+<circle class="teal" cx="606.64" cy="286.70" r="3.2"/>
+<line class="auto whisker" x1="255.24" y1="295.30" x2="258.32" y2="295.30"/>
+<line class="auto" x1="255.24" y1="292.30" x2="255.24" y2="298.30"/>
+<line class="auto" x1="258.32" y1="292.30" x2="258.32" y2="298.30"/>
+<rect class="auto" x="253.98" y="292.50" width="5.6" height="5.6"/>
+<text class="label" x="18" y="324.00">Generic</text>
+<text class="support" x="218" y="324.00" text-anchor="end">5,125</text>
+<line class="teal whisker" x1="598.60" y1="315.70" x2="601.34" y2="315.70"/>
+<line class="teal" x1="598.60" y1="312.70" x2="598.60" y2="318.70"/>
+<line class="teal" x1="601.34" y1="312.70" x2="601.34" y2="318.70"/>
+<circle class="teal" cx="599.97" cy="315.70" r="3.2"/>
+<line class="auto whisker" x1="518.65" y1="324.30" x2="521.16" y2="324.30"/>
+<line class="auto" x1="518.65" y1="321.30" x2="518.65" y2="327.30"/>
+<line class="auto" x1="521.16" y1="321.30" x2="521.16" y2="327.30"/>
+<rect class="auto" x="517.11" y="321.50" width="5.6" height="5.6"/>
+<text class="label" x="18" y="353.00">Reconnaissance</text>
+<text class="support" x="218" y="353.00" text-anchor="end">4,540</text>
+<line class="teal whisker" x1="609.54" y1="344.70" x2="611.81" y2="344.70"/>
+<line class="teal" x1="609.54" y1="341.70" x2="609.54" y2="347.70"/>
+<line class="teal" x1="611.81" y1="341.70" x2="611.81" y2="347.70"/>
+<circle class="teal" cx="610.68" cy="344.70" r="3.2"/>
+<line class="auto whisker" x1="279.94" y1="353.30" x2="290.90" y2="353.30"/>
+<line class="auto" x1="279.94" y1="350.30" x2="279.94" y2="356.30"/>
+<line class="auto" x1="290.90" y1="350.30" x2="290.90" y2="356.30"/>
+<rect class="auto" x="282.62" y="350.50" width="5.6" height="5.6"/>
+<text class="label" x="18" y="382.00">Shellcode</text>
+<text class="support" x="218" y="382.00" text-anchor="end">401</text>
+<line class="teal whisker" x1="598.77" y1="373.70" x2="608.01" y2="373.70"/>
+<line class="teal" x1="598.77" y1="370.70" x2="598.77" y2="376.70"/>
+<line class="teal" x1="608.01" y1="370.70" x2="608.01" y2="376.70"/>
+<circle class="teal" cx="603.39" cy="373.70" r="3.2"/>
+<line class="auto whisker" x1="250.00" y1="382.30" x2="251.47" y2="382.30"/>
+<line class="auto" x1="250.00" y1="379.30" x2="250.00" y2="385.30"/>
+<line class="auto" x1="251.47" y1="379.30" x2="251.47" y2="385.30"/>
+<rect class="auto" x="247.69" y="379.50" width="5.6" height="5.6"/>
+<text class="label" x="18" y="411.00">Held-out Worms</text>
+<text class="support" x="218" y="411.00" text-anchor="end">36</text>
+<line class="auto whisker" x1="250.00" y1="411.30" x2="250.00" y2="411.30"/>
+<line class="auto" x1="250.00" y1="408.30" x2="250.00" y2="414.30"/>
+<line class="auto" x1="250.00" y1="408.30" x2="250.00" y2="414.30"/>
+<rect class="auto" x="247.20" y="408.50" width="5.6" height="5.6"/>
+<line class="axis" x1="250.0" y1="416.0" x2="642.0" y2="416.0"/>
+<circle cx="260" cy="456" r="3.2" fill="#1F6F5F"/><text class="muted" x="269" y="460" font-size="10.2">Mondrian coverage</text>
+<rect x="408" y="453.2" width="5.6" height="5.6" fill="#555B59"/><text class="muted" x="420" y="460" font-size="10.2">Autonomous acceptance</text>
+<text class="muted" x="18" y="477" font-size="9.5">Held-out Worms has no conformal-coverage estimate; 36/36 were routed away from automation.</text>
+<text class="muted" x="18" y="488" font-size="9.5">Seed SD is not uncertainty across periods or datasets. Higher acceptance is not inherently better.</text>
+</svg>
+

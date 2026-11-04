@@ -101,6 +101,11 @@ Marginal split conformal had 90.44% overall known-class empirical coverage, clos
 
 ### 3.4 Cross-class routing pattern
 
+![Class-wise empirical Mondrian coverage and autonomous acceptance, with test support and four-seed sample-SD intervals](figures/figure1_classwise_reliability.svg)
+
+**Figure 1.** Empirical Mondrian coverage and autonomous-acceptance rate by true test class. Points show means across four classifier seeds and whiskers show sample standard deviations on the same fixed temporal split; they are not confidence intervals across periods or datasets. The dashed line marks the nominal 90% conformal target. Test support is printed beside each class. Conformal coverage is not defined for the held-out `Worms` class; all 36 flows were escalated, which does not mean the open-set detector rejected them.
+
+
 Overall, 68.56%–69.50% of test rows passed the predeclared automation gate, with 99.75%–99.80% accuracy among automated rows. Table 2 shows the class-wise pattern. Reported values are means ± sample standard deviations across the four classifier seeds on the same split; supports are fixed per seed. This SD measures model-seed variability only.
 
 | Class | Test support | Mondrian coverage (%) | Automated coverage (%) | Accuracy among automated (%) |
@@ -165,3 +170,4 @@ On one fixed future-time test window from NF-UNSW-NB15-v3, high known-class accu
 4. A. Bendale and T. E. Boult, “Towards Open Set Deep Networks,” in *Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)*, 2016, pp. 1563–1572, doi: [10.1109/CVPR.2016.173](https://doi.org/10.1109/CVPR.2016.173).
 5. R. F. Barber, E. J. Candès, A. Ramdas, and R. J. Tibshirani, “Conformal prediction beyond exchangeability,” *The Annals of Statistics*, vol. 51, no. 2, pp. 816–845, 2023, doi: [10.1214/23-AOS2276](https://doi.org/10.1214/23-AOS2276).
 6. S. V. Arepalli, U. S. G. Irrinki, A. Morampudi, et al., “Conformal prediction for network intrusion triage and analysis of unseen attack families,” *Discover Informatics*, vol. 1, article 33, 2026, published 2 November 2026, doi: [10.1007/s44564-026-00033-y](https://doi.org/10.1007/s44564-026-00033-y).
+
