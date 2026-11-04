@@ -105,6 +105,7 @@ Cross-domain and monotonicity questions are separate studies; the available v2 t
 
 ## 7. Inputs still useful
 
+- Evidence-backed Methods, Results, Discussion, Limitations, and provisional Abstract/Conclusion sections are drafted in `docs/MANUSCRIPT_DRAFT.md`. Literature citations, original feature-ablation intent, dataset acquisition date, and publication-format requirements remain unresolved.
 - The exact v2.1.2 ZIP/source snapshot or a location where it can be accessed, if available.
 - The original paper draft or authoritative feature-ablation specification, if the relevant version is not in the older package.
 - No additional dataset is required to complete the independent audit of the existing four runs. Additional v3 datasets/time periods would be required for broader external/temporal generalization claims.

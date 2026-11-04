@@ -50,4 +50,4 @@ The executable contract and unit test define these as removal ablations: `baseli
 
 ## Reproducibility boundary
 
-Recalculation from saved predictions exactly reproduced the OSR ranking/detection and routing metrics reported in run metadata. The prediction export lacks a separate closed-set top-1 class for OSR-rejected rows, so closed-set accuracy cannot be reconstructed from the prediction CSV alone. That limitation should be addressed in a future export version; the existing recorded metrics are tied to the saved run metadata and executable code.
+Recalculation from the original saved predictions exactly reproduced the OSR ranking/detection and routing metrics reported in run metadata. Those original CSVs lack a separate closed-set top-1 class for OSR-rejected rows. The pipeline exporter now preserves `closed_set_predicted_class_id` and its label, and regenerated outputs for seeds 42–45 are recorded in `docs/REEXPORT_MANIFEST.csv`. Closed-set accuracy recomputed directly from each regenerated CSV exactly matches its metadata. The original experiment files remain unchanged.
