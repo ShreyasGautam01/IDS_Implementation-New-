@@ -1,6 +1,6 @@
 # Reliability of Multiclass Intrusion Detection Under a Fixed Temporal Holdout
 
-**Draft status:** Evidence-backed core draft for Methods, Results, Discussion, and Limitations. The starter references below were checked against primary dataset, publisher, or journal sources; the broader literature review, exact dataset acquisition date, and target publication format remain open. Do not submit in this form.
+**Draft status:** Evidence-backed core draft for Methods, Results, Discussion, and Limitations. This workspace is the authoritative project record for the current study. The remaining work is to complete the focused related-work review, polish the paper, and apply a venue format once one is selected. The project download date is not recorded and is not needed to interpret the experiment; the dataset release, source record, file hash, and size are reported instead. Do not submit in this form.
 
 ## Abstract (provisional)
 
@@ -40,7 +40,7 @@ This comparison motivates the limited scope of the contribution. It does not est
 
 ### 2.2 Dataset and label construction
 
-We used the local `NF-UNSW-NB15-v3.csv` file identified in the run metadata by SHA-256 `4ebb97bd74412d566137d95a6fc3ffd8f374f1cf8cfe204d007848e7a668f9b5` and size 577,360,958 bytes. The analyzed file contains 2,365,424 flows [1]. The dataset acquisition date was not recorded. The UQ data-bag metadata (`bag-info.txt`; [dataset record](https://espace.library.uq.edu.au/view/UQ:6e0eda1)) gives a bagging date of 2025-02-28, while current NTFS metadata records the outer bag folder created on 2026-11-03 14:39:26 UTC and the CSV last written at 14:39:33 UTC. These filesystem timestamps could reflect copying or extraction and are not treated as a confirmed download date; the acquisition date remains an open provenance item.
+We used the local `NF-UNSW-NB15-v3.csv` file identified in the run metadata by SHA-256 `4ebb97bd74412d566137d95a6fc3ffd8f374f1cf8cfe204d007848e7a668f9b5` and size 577,360,958 bytes. The analyzed file contains 2,365,424 flows [1]. Its source is the University of Queensland NF-UNSW-NB15-v3 data bag (RAiD `https://hdl.handle.net/102.100.100/602564`; bag identifier `f7546561558c07c5_NFV3DATA-A11964_A11964`). The bag metadata gives a bagging date of 2025-02-28; this is not represented as the project's download date. The project download date was not recorded.
 
 `Benign` was encoded as class 0; eight known attack categories were encoded as classes 1–8. `Worms` was withheld from all fitted stages and encoded as unknown. The complete file contained 158 `Worms` flows. The time protocol excluded 122 that occurred before the final test window, leaving 36 unknown flows in the test set.
 
@@ -50,7 +50,7 @@ The start and end timestamps, `FLOW_START_MILLISECONDS` and `FLOW_END_MILLISECON
 
 The realized partitions contained 1,299,824 proper-training rows, 352,983 validation rows, 353,072 calibration rows, and 353,889 test rows. A further 5,534 rows were excluded around the temporal boundaries. The exact boundary timestamps and per-class counts are stored in the run metadata. These rules reduce near-boundary flow overlap but do not establish independence across longer campaigns, hosts, or sessions.
 
-Non-finite feature values were treated as missing. Median imputation and a `RobustScaler` were fitted using proper-training rows only. The executed `set_c` schema selected 38 numeric predictors after removing identifiers/timestamps and the configured TTL, TCP-window, and protocol groups. This is a feature-removal schema in the executable code. The original manuscript's intended ablation direction is unverified, so we do not interpret the name `set_c` as evidence of a broader feature-group comparison.
+Non-finite feature values were treated as missing. Median imputation and a `RobustScaler` were fitted using proper-training rows only. The executed `set_c` schema selected 38 numeric predictors after removing identifiers/timestamps and the configured TTL, TCP-window, and protocol groups. This is the exact feature configuration evaluated in the primary experiment. We make no comparative feature-ablation claim: schema names are implementation labels, and this paper reports the observed reliability results for the recorded `set_c` configuration.
 
 ### 2.4 Classifier
 
@@ -148,10 +148,10 @@ The close prior study by Arepalli et al. makes it especially important to state 
 3. **Validation support.** Seven of nine OSR nearest-class regions could not receive fitted rejection thresholds under the minimum-support rule and used no-rejection fallbacks.
 4. **Temporal dependence.** The embargo and complete-flow boundary checks reduce overlap around cut points, but do not rule out campaigns, host sessions, or duplicates spanning periods.
 5. **Conformal exchangeability.** Calibration and test data are temporally separated. Exact split-conformal coverage assumptions have not been established under this temporal shift.
-6. **Feature specification uncertainty.** The code and tests define removal ablations, but the intended direction in the current-study manuscript is unverified. The primary run uses `set_c`; its result should not be presented as a validated feature ablation.
+6. **Single feature configuration.** The primary run uses the executable `set_c` schema. This study does not compare feature ablations, so its results do not establish the effect of removing TTL, TCP-window, or protocol features.
 7. **No deployment evaluation.** The study does not measure latency, analyst workload, operational safety, line rate, or performance under adaptive attackers.
 8. **Limited replication scope.** Four classifier seeds share the same split and data. They characterize model-seed variation, not variation across time periods or environments. OSR scores are deterministic across those seeds.
-9. **Provenance and literature.** The dataset acquisition date and a verified bibliography for the current study remain to be completed.
+9. **Provenance and literature.** The dataset release, source record, and file checksum are identified, but the project download date was not recorded. The related-work review still needs expansion and verification before submission.
 10. **Prior-work overlap.** A directly related 2026 paper already evaluates conformal triage and unseen-family detection across two datasets, including a temporal analysis. The current paper has a narrower contribution; a complete comparison with that paper and its cited work is required before making any novelty claim.
 
 ## 6. Conclusion (provisional)
@@ -161,8 +161,8 @@ On one fixed future-time test window from NF-UNSW-NB15-v3, high known-class accu
 ## Items to resolve before submission
 
 - Expand the verified starter bibliography into a balanced related-work review of NIDS reliability, open-set detection, and temporal evaluation; confirm the relevant literature before making any novelty claim.
-- Recover the current-study manuscript or authoritative feature-ablation specification.
-- Confirm the dataset acquisition date and complete citation/metadata.
+- Complete the related-work comparison and verify the final reference list against publisher or primary-source records.
+- Confirm the dataset citation format required by the selected venue; keep the acquisition date unstated because it is not recorded.
 - Review the figures against the selected venue’s formatting requirements and confirm it permits reporting seed SDs for this fixed split; add supplementary figures only if they answer a distinct paper question.
 - Verify all descriptions against the final selected venue's reporting requirements.
 
@@ -175,4 +175,3 @@ On one fixed future-time test window from NF-UNSW-NB15-v3, high known-class accu
 5. R. F. Barber, E. J. Candès, A. Ramdas, and R. J. Tibshirani, “Conformal prediction beyond exchangeability,” *The Annals of Statistics*, vol. 51, no. 2, pp. 816–845, 2023, doi: [10.1214/23-AOS2276](https://doi.org/10.1214/23-AOS2276).
 6. S. V. Arepalli, U. S. G. Irrinki, A. Morampudi, et al., “Conformal prediction for network intrusion triage and analysis of unseen attack families,” *Discover Informatics*, vol. 1, article 33, 2026, published 2 November 2026, doi: [10.1007/s44564-026-00033-y](https://doi.org/10.1007/s44564-026-00033-y).
 7. W. Ahmed, M. A. Rahaman, P. Roy, and P. Alam, “The dashboard says ‘perfect’: a systematic audit of label-free model monitoring and test-time adaptation under temporal distribution shift in network intrusion detection,” *Frontiers in Artificial Intelligence*, vol. 9, article 1928858, 2026, doi: [10.3389/frai.2026.1928858](https://doi.org/10.3389/frai.2026.1928858).
-

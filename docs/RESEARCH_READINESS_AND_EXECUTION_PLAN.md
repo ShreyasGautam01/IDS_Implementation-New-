@@ -50,7 +50,7 @@ This document separates observed facts from interpretations and open decisions. 
 - Its source, structured summary data, and design specification are `scripts/plot_classwise_reliability.py`, `docs/figures/figure1_classwise_reliability_data.csv`, and `docs/figures/figure1_classwise_reliability_spec.json`. The manuscript caption is included in `docs/MANUSCRIPT_DRAFT.md`.
 - Figures 1 and 2 were checked as valid SVG and previewed at their declared physical dimensions (178 × 140 mm and 178 × 90 mm). Native-render previews were inspected in color and grayscale. Figure 1 was revised after review to add the missing percentage-axis label and give the legend/notes more clearance; class supports, whiskers, chance/target references, and captions are visible without clipping. Marker shapes preserve distinction in grayscale. The outputs are editable vector drafts; venue-specific final formatting remains open.
 
-## 3. Feature-ablation discrepancy (confirmed)
+## 3. Feature-schema audit and manuscript scope
 
 `src/ids_reliability/features.py` excludes each group's configured features when that group is active for the schema. Current code behavior is:
 
@@ -61,9 +61,9 @@ This document separates observed facts from interpretations and open decisions. 
 | `set_b` | TTL + window | protocol | set A plus window |
 | `set_c` | TTL + window + protocol | none | set B plus protocol |
 
-The disagreement was confirmed between code and the earlier protocol wording. The code and unit test both support the feature-removal interpretation shown in the table, so that is now the authoritative implementation contract and the protocol text has been corrected. Whether this matches the original manuscript's intended ablation remains unverified without the source specification.
+The disagreement was confirmed between code and earlier protocol wording. The code, tests, and corrected protocol now agree on the feature-removal interpretation shown in the table. The current paper uses only the `set_c` run as its primary configuration and makes no comparative ablation claim, so recovering an older manuscript's intended schema naming is unnecessary for the paper's current scope.
 
-Seed 42 metadata confirms the main run used `set_c`, excluded the present `MIN_TTL`, `MAX_TTL`, `TCP_WIN_MAX_IN`, `TCP_WIN_MAX_OUT`, and protocol-group fields, and selected 38 numeric features. Thus, the model's features are known, but the manuscript's current description of `set_c` is wrong relative to the code. The main performance values remain observations for that exact 38-feature model; their intended ablation interpretation is unresolved. Cross-dataset schema comparisons also require corrected labels/interpretation before use.
+Seed 42 metadata confirms the main run used `set_c`, excluded the present `MIN_TTL`, `MAX_TTL`, `TCP_WIN_MAX_IN`, `TCP_WIN_MAX_OUT`, and protocol-group fields, and selected 38 numeric features. Thus, the model's executed feature set is known. The main performance values are observations for that exact 38-feature model. Cross-dataset schema comparisons remain exploratory and require corrected labels/interpretation before use.
 
 The column-by-column manifest is `docs/feature_manifest_nf_unsw_nb15_v3.csv`. Under current code, the v3 data retain 47 predictors for `baseline`, 45 for `set_a`, 43 for `set_b`, and 38 for `set_c`. It identifies label fields, six identifier/time fields, all present configured group members, and the remaining numeric predictors. Configured but absent group members are `STTL`, `DTTL`, `INIT_WIN_BYTES_FWD`, and `INIT_WIN_BYTES_BWD`.
 
@@ -93,18 +93,18 @@ Cross-domain and monotonicity questions are separate studies; the available v2 t
 ## 5. Immediate audit and implementation tasks
 
 1. Compare the draft and protocol against Arepalli et al. (2026), Ahmed et al. (2026), and their closely related references; the temporal-shift audit is now cited as context, but the full literature comparison and narrow contribution statement still need review.
-2. Recover/locate the exact v2.1.2 archive/source and any current-study manuscript/specification if available; the inspected `ids_rework_v2` package is a distinct Random Forest study and does not establish the current feature-ablation intent. The legacy IEEE package above is not that specification.
-3. Use `docs/MANUSCRIPT_EVIDENCE_MAP.md` as the current claim-to-evidence map. Verify the background bibliography and novelty against primary sources before submission; do not carry forward legacy numbers without exact provenance.
+2. Treat this repository, including `docs/MANUSCRIPT_DRAFT.md`, the protocol, code, run metadata, and claim ledger, as the authoritative record of the current study. The other local packages are separate historical projects and are not required to continue the paper.
+3. Use `docs/MANUSCRIPT_EVIDENCE_MAP.md` as the current claim-to-evidence map. Complete the focused related-work comparison against primary sources before submission; do not carry forward legacy numbers without exact provenance.
 4. Decide whether more datasets or a newly predeclared test design are needed for broader claims. Any new design after current test inspection must be marked exploratory or separately confirmatory.
 5. The locked four-seed rerun with the updated exporter is complete. Keep the regenerated output folders and their checksums available with the research archive if per-flow auditability is needed.
-6. Record the actual dataset download/acquisition date and source citation in the provenance manifest; the UQ bagging date is not the project download date.
+6. Cite the exact dataset release, UQ source record, and analyzed-file checksum. The project's acquisition date was not recorded and is not a blocker; do not infer it from the bagging date or filesystem times.
 7. Run the real-data monotonicity experiment only if that research question remains in scope; otherwise explicitly omit empirical monotonicity results from the paper.
 8. Decide from the selected venue and remaining results whether supplementary figures are needed; derive them only from locked outputs and preserve their plotted values alongside source CSVs.
-9. Once open provenance/specification inputs are resolved, freeze paper tables and draft methods, results, interpretation, discussion, and limitations from artifacts.
+9. Freeze paper tables and revise Methods, Results, interpretation, Discussion, and Limitations against the recorded artifacts; no external handoff folder is required.
 
 ## 6. Acceptance criteria before final paper results
 
-- Feature-schema definitions have one authoritative, versioned meaning, and the code/docs/tests agree.
+- The primary paper names the executed `set_c` feature schema precisely and does not imply a comparative feature-ablation result. The code/docs/tests agree on the schema definition.
 - Every reported number reproduces from committed code/config and identified run artifacts.
 - Per-seed predictions and metadata agree on dataset checksum, fixed split, class counts, metric definitions, and score direction.
 - Unknown-family results prominently state the 36-row denominator and do not imply robust OSR from this support.
@@ -114,8 +114,6 @@ Cross-domain and monotonicity questions are separate studies; the available v2 t
 
 ## 7. Inputs still useful
 
-- Evidence-backed Methods, Results, Discussion, Limitations, and provisional Abstract/Conclusion sections are drafted in `docs/MANUSCRIPT_DRAFT.md`. Literature citations, original feature-ablation intent, dataset acquisition date, and publication-format requirements remain unresolved.
-- The exact v2.1.2 ZIP/source snapshot or a location where it can be accessed, if available.
-- The original paper draft or authoritative feature-ablation specification, if the relevant version is not in the older package.
+- Evidence-backed Methods, Results, Discussion, Limitations, and provisional Abstract/Conclusion sections are drafted in `docs/MANUSCRIPT_DRAFT.md`. The focused literature review and venue formatting remain open.
+- No additional project handoff or manuscript is needed: this repository is the current study record. If feature ablation remains outside the paper's scope, report only the executed `set_c` configuration and make no ablation-effect claim.
 - No additional dataset is required to complete the independent audit of the existing four runs. Additional v3 datasets/time periods would be required for broader external/temporal generalization claims.
-
