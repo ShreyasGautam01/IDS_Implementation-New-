@@ -1,6 +1,6 @@
 # Reliability of Multiclass Intrusion Detection Under a Fixed Temporal Holdout
 
-**Draft status:** Evidence-backed core draft for Methods, Results, Discussion, and Limitations. The literature review, verified citations, exact dataset acquisition date, and target publication format remain open. Do not submit in this form.
+**Draft status:** Evidence-backed core draft for Methods, Results, Discussion, and Limitations. The starter references below were checked against primary dataset, publisher, or journal sources; the broader literature review, exact dataset acquisition date, and target publication format remain open. Do not submit in this form.
 
 ## Abstract (provisional)
 
@@ -10,17 +10,19 @@ High closed-set classification accuracy does not by itself establish that an int
 
 ## 1. Introduction (working draft)
 
-Machine-learning intrusion detection is commonly summarized with closed-set classification metrics. In operational settings, however, a system also needs to indicate when a prediction may be unreliable, particularly when traffic changes over time or an attack family was absent during training. **[Add verified citations on NIDS evaluation under temporal/domain shift, open-set recognition, and uncertainty or selective prediction.]**
+Closed-set classification treats labels as a fixed set, so a classifier alone cannot reject an input as belonging to an unseen class. OpenMax illustrates this problem and proposes an extreme-value/meta-recognition method for open-set image recognition; its representation and decision rule differ from the tabular score evaluated here [4]. For network intrusion detection, the NF-UNSW-NB15-v3 release adds temporal flow features to the NetFlow-based UNSW-NB15 corpus, and its associated temporal study examines how those features behave over time [1, 2]. The base UNSW-NB15 corpus was introduced as a benchmark combining normal traffic with contemporary synthesized attack activity [3].
 
-This study examines a narrower question: on a fixed future-time evaluation of NF-UNSW-NB15-v3, do a class-conditional Mahalanobis–Weibull score, class-conditional conformal sets, and a predeclared selective routing rule provide useful reliability information alongside a multiclass classifier? We use a chronological split, preserve a locked future test period, withhold the `Worms` family from model fitting, and compare the open-set score with a maximum-probability baseline.
+Split conformal prediction offers finite-sample coverage under exchangeability. Temporal drift can violate that assumption, so temporal evaluation should report observed coverage without presenting the usual guarantee as established [5].
 
-The study is an empirical benchmark of one dataset and one temporal window. It does not claim generalization across datasets, a guaranteed open-set detector, calibrated classifier probabilities, or deployment safety. The reported results include negative evidence: the fitted Weibull score performs poorly on the withheld family, and aggregate routing accuracy masks weak performance for some attack classes.
+This study examines a bounded question: on a fixed future-time evaluation of NF-UNSW-NB15-v3, how do a class-conditional Mahalanobis–Weibull score, class-conditional conformal sets, and a predeclared selective routing rule behave alongside a multiclass classifier? We use a chronological split, preserve a locked future test period, withhold the `Worms` family from model fitting, and compare the open-set score with a maximum-probability baseline. We do not claim that this component combination is unprecedented; the contribution is a transparent empirical account of its behavior under this specific protocol.
+
+The study covers one dataset and one temporal window. It does not establish generalization across datasets, a guaranteed open-set detector, calibrated classifier probabilities, or deployment safety. The reported results include negative evidence: the fitted Weibull score performs poorly on the withheld family, and aggregate routing accuracy masks weak performance for some attack classes.
 
 ## 2. Methods
 
 ### 2.1 Dataset and label construction
 
-We used the local `NF-UNSW-NB15-v3.csv` file identified in the run metadata by SHA-256 `4ebb97bd74412d566137d95a6fc3ffd8f374f1cf8cfe204d007848e7a668f9b5` and size 577,360,958 bytes. The analyzed file contains 2,365,424 flows. The dataset acquisition date was not recorded and must be added from provenance records before publication. **[Insert verified dataset citation and acquisition date.]**
+We used the local `NF-UNSW-NB15-v3.csv` file identified in the run metadata by SHA-256 `4ebb97bd74412d566137d95a6fc3ffd8f374f1cf8cfe204d007848e7a668f9b5` and size 577,360,958 bytes. The analyzed file contains 2,365,424 flows [1]. The dataset acquisition date was not recorded and must be added from provenance records before publication.
 
 `Benign` was encoded as class 0; eight known attack categories were encoded as classes 1–8. `Worms` was withheld from all fitted stages and encoded as unknown. The complete file contained 158 `Worms` flows. The time protocol excluded 122 that occurred before the final test window, leaving 36 unknown flows in the test set.
 
@@ -111,8 +113,16 @@ On one fixed future-time test window from NF-UNSW-NB15-v3, high known-class accu
 
 ## Items to resolve before submission
 
-- Add and verify primary-source citations for the introduction and related work.
+- Expand the verified starter bibliography into a balanced related-work review of NIDS reliability, open-set detection, and temporal evaluation; confirm the relevant literature before making any novelty claim.
 - Recover the current-study manuscript or authoritative feature-ablation specification.
 - Confirm the dataset acquisition date and complete citation/metadata.
 - Add the full class-wise results table with uncertainty/support columns and produce publication-ready figures.
 - Verify all descriptions against the final selected venue's reporting requirements.
+
+## References (verified starter set; expand before submission)
+
+1. University of Queensland, “ML-Based NIDS Datasets,” dataset catalogue and NF-UNSW-NB15-v3 entry, accessed 4 November 2026. [https://staff.itee.uq.edu.au/marius/NIDS_datasets/](https://staff.itee.uq.edu.au/marius/NIDS_datasets/)
+2. M. Luay, S. Layeghy, N. Noorbin, M. Sarhan, G. Kulatilleke, N. Moustafa, and M. Portmann, “Time Matters: Temporal NetFlow Features for ML-Based Network Intrusion Detection,” *IEEE Access*, vol. 14, pp. 66899–66913, 2026, doi: [10.1109/ACCESS.2026.3688204](https://doi.org/10.1109/ACCESS.2026.3688204).
+3. N. Moustafa and J. Slay, “UNSW-NB15: A comprehensive data set for network intrusion detection systems (UNSW-NB15 network data set),” in *2015 Military Communications and Information Systems Conference (MilCIS)*, 2015, pp. 1–6, doi: [10.1109/MilCIS.2015.7348942](https://doi.org/10.1109/MilCIS.2015.7348942).
+4. A. Bendale and T. E. Boult, “Towards Open Set Deep Networks,” in *Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)*, 2016, pp. 1563–1572, doi: [10.1109/CVPR.2016.173](https://doi.org/10.1109/CVPR.2016.173).
+5. R. F. Barber, E. J. Candès, A. Ramdas, and R. J. Tibshirani, “Conformal prediction beyond exchangeability,” *The Annals of Statistics*, vol. 51, no. 2, pp. 816–845, 2023, doi: [10.1214/23-AOS2276](https://doi.org/10.1214/23-AOS2276).
