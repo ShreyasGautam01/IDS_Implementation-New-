@@ -86,7 +86,7 @@ Cross-domain and monotonicity questions are separate studies; the available v2 t
 ## 5. Immediate audit and implementation tasks
 
 1. Recover/locate the exact v2.1.2 archive/source and any current-study manuscript/specification if available; compare version/method definitions and confirm the manuscript's intended feature ablation. The legacy IEEE package above is not that specification.
-2. Build a manuscript claim-to-evidence map once the paper draft is available. Do not carry forward legacy numbers without exact provenance.
+2. Use `docs/MANUSCRIPT_EVIDENCE_MAP.md` as the current claim-to-evidence map. Verify the background bibliography and novelty against primary sources before submission; do not carry forward legacy numbers without exact provenance.
 3. Decide whether more datasets or a newly predeclared test design are needed for broader claims. Any new design after current test inspection must be marked exploratory or separately confirmatory.
 4. The locked four-seed rerun with the updated exporter is complete. Keep the regenerated output folders and their checksums available with the research archive if per-flow auditability is needed.
 5. Record the actual dataset download/acquisition date and source citation in the provenance manifest; the UQ bagging date is not the project download date.
