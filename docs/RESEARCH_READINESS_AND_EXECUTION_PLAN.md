@@ -44,6 +44,12 @@ This document separates observed facts from interpretations and open decisions. 
 - The original completed-run CSVs do not independently recover closed-set top-1 accuracy for OSR-rejected rows. In each regenerated export, closed-set accuracy recomputed directly from `true_class_id` and `closed_set_predicted_class_id` matches `run_metadata.json` exactly. The original run files remain unchanged.
 - Detailed per-class conformal coverage, tail-size sensitivity, threshold fallbacks, and routing rates have been summarized in `docs/RELIABILITY_DIAGNOSTICS.md`.
 
+### Figure production update (2026-11-04)
+
+- Figure 1 is now generated at `docs/figures/figure1_classwise_reliability.svg`. It displays class-wise empirical Mondrian coverage and autonomous acceptance, test support, the nominal 90% reference, and sample-SD whiskers across the four classifier seeds on the same fixed split.
+- Its source, structured summary data, and design specification are `scripts/plot_classwise_reliability.py`, `docs/figures/figure1_classwise_reliability_data.csv`, and `docs/figures/figure1_classwise_reliability_spec.json`. The manuscript caption is included in `docs/MANUSCRIPT_DRAFT.md`.
+- The SVG parsed as valid XML and its declared 178 × 130 mm dimensions, class labels, and key annotations were checked. Pixel-level final-size and grayscale inspection remains open: local-file preview was denied by the browser policy, and the environment lacks a local SVG rasterizer. Treat Figure 1 as a generated draft pending visual review, not as final publication artwork.
+
 ## 3. Feature-ablation discrepancy (confirmed)
 
 `src/ids_reliability/features.py` excludes each group's configured features when that group is active for the schema. Current code behavior is:
@@ -93,7 +99,8 @@ Cross-domain and monotonicity questions are separate studies; the available v2 t
 5. The locked four-seed rerun with the updated exporter is complete. Keep the regenerated output folders and their checksums available with the research archive if per-flow auditability is needed.
 6. Record the actual dataset download/acquisition date and source citation in the provenance manifest; the UQ bagging date is not the project download date.
 7. Run the real-data monotonicity experiment only if that research question remains in scope; otherwise explicitly omit empirical monotonicity results from the paper.
-8. Once open provenance/specification inputs are resolved, freeze paper tables and draft methods, results, interpretation, discussion, and limitations from artifacts.
+8. Complete visual and grayscale inspection of Figure 1, then produce the remaining result figures from the locked outputs and keep their plotted values linked to source CSVs.
+9. Once open provenance/specification inputs are resolved, freeze paper tables and draft methods, results, interpretation, discussion, and limitations from artifacts.
 
 ## 6. Acceptance criteria before final paper results
 
@@ -111,3 +118,4 @@ Cross-domain and monotonicity questions are separate studies; the available v2 t
 - The exact v2.1.2 ZIP/source snapshot or a location where it can be accessed, if available.
 - The original paper draft or authoritative feature-ablation specification, if the relevant version is not in the older package.
 - No additional dataset is required to complete the independent audit of the existing four runs. Additional v3 datasets/time periods would be required for broader external/temporal generalization claims.
+
