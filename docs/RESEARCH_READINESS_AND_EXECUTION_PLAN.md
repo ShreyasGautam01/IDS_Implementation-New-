@@ -35,7 +35,8 @@ This document separates observed facts from interpretations and open decisions. 
 - Only two of nine nearest-class OSR regions use validation-fitted thresholds; seven use the predeclared no-rejection fallback due to insufficient validation support.
 - Four-seed metrics are summarized in `artifacts_rebuilt/EXPERIMENT_RESULTS.md` and `artifacts_rebuilt/multi_seed_summary.csv`. Detailed run artifacts exist locally under timestamped seed directories. These detailed artifacts have not been uploaded.
 - The four locked seeds were regenerated with the updated prediction exporter under `artifacts_reexport/`: `20261104T054008460933Z_seed42`, `20261104T054436806041Z_seed43`, `20261104T054840547477Z_seed44`, and `20261104T055304601532Z_seed45`. For every seed, global metrics, dataset-file metadata, and temporal-split metadata exactly match the original run. Each new prediction export has 353,889 rows and preserves the closed-set top-1 class before OSR. SHA-256 hashes and sizes for the new prediction/metadata files are recorded in `docs/REEXPORT_MANIFEST.csv`. The large local artifacts are intentionally excluded from GitHub; the code and reproduction notes are published.
-- A bounded binary cross-dataset pilot ran on the two supplied v2 datasets, with 10,000-row disjoint source and target samples per dataset, four seeds (42–45), four code-defined removal schemas, and both directions. Because v2 has no configured flow timestamps, source evaluation uses the explicit stratified-random fallback. It is not temporal evidence. No real-data monotonicity experiment has been verified as run.
+- The protocol's binary cross-dataset experiment has completed on both the v2 pilot and the v3 UNSW/CIC-IDS2018 pair. The v2 pilot used 10,000-row disjoint samples and random source splits because timestamps were absent. The v3 comparison used 200,000-row disjoint source and target samples per dataset, chronological source evaluation, four schemas, four seeds, and both directions. Both are binary transfer studies, separate from the multiclass OSR/conformal/routing pipeline. The v3 results and limitations are in `docs/CROSS_DATASET_V3_EXPERIMENT.md`.
+- The separate binary monotonicity sensitivity experiment has run on NF-UNSW-NB15-v3 (seed 42, `set_c`) and is recorded under `artifacts_reexport/monotonicity_binary/`, with interpretation in `docs/MONOTONICITY_V3_EXPERIMENT.md`. Its preprocessing path was corrected to apply the same non-finite handling and clipping used elsewhere before the run completed.
 
 ### Independent reproduction status
 
@@ -88,7 +89,7 @@ Current evidence-bearing questions are:
 3. What empirical class-wise coverage and set sizes does non-pooled conformal prediction produce under this temporal split?
 4. What coverage and errors result from the fixed selective-routing rule?
 
-Cross-domain and monotonicity questions are separate studies; the available v2 transfer pilot and synthetic tests do not answer them confirmatorily for v3.
+Cross-domain and monotonicity questions are separate experiments. The v3 bidirectional transfer/schema experiment answers the binary transfer question for fixed samples from the two v3 populations; it is not transfer evaluation of the multiclass reliability pipeline. The v3 monotonicity experiment is a one-seed binary sensitivity analysis and does not establish a guarantee for the multiclass pipeline or arbitrary adversarial robustness.
 
 ## 5. Immediate audit and implementation tasks
 
@@ -98,7 +99,7 @@ Cross-domain and monotonicity questions are separate studies; the available v2 t
 4. Decide whether more datasets or a newly predeclared test design are needed for broader claims. Any new design after current test inspection must be marked exploratory or separately confirmatory.
 5. The locked four-seed rerun with the updated exporter is complete. Keep the regenerated output folders and their checksums available with the research archive if per-flow auditability is needed.
 6. Cite the exact dataset release, UQ source record, and analyzed-file checksum. The project's acquisition date was not recorded and is not a blocker; do not infer it from the bagging date or filesystem times.
-7. Run the real-data monotonicity experiment only if that research question remains in scope; otherwise explicitly omit empirical monotonicity results from the paper.
+7. The protocol's v3 transfer and real-data monotonicity experiments are complete under the recorded configurations. If stronger seed-level uncertainty is required for monotonicity, add seeds as an explicitly labeled extension; the current result is a single-seed sensitivity analysis.
 8. Decide from the selected venue and remaining results whether supplementary figures are needed; derive them only from locked outputs and preserve their plotted values alongside source CSVs.
 9. Freeze paper tables and revise Methods, Results, interpretation, Discussion, and Limitations against the recorded artifacts; no external handoff folder is required.
 
@@ -109,11 +110,12 @@ Cross-domain and monotonicity questions are separate studies; the available v2 t
 - Per-seed predictions and metadata agree on dataset checksum, fixed split, class counts, metric definitions, and score direction.
 - Unknown-family results prominently state the 36-row denominator and do not imply robust OSR from this support.
 - Conformal results are described as empirical under temporal shift unless exchangeability is justified.
-- Cross-dataset and monotonicity claims are included only if corresponding real-data runs exist and meet their declared protocols.
+- Cross-dataset claims are limited to the sampled binary v2 and v3 transfer experiments. Monotonicity claims are limited to the recorded v3 binary perturbation experiment and its tested feature directions.
 - Limitations include the single dataset/test window, rare unknown support, insufficient validation strata, no independent EVT tail validation, and no deployment or workload evaluation.
 
 ## 7. Inputs still useful
 
 - Evidence-backed Methods, Results, Discussion, Limitations, and provisional Abstract/Conclusion sections are drafted in `docs/MANUSCRIPT_DRAFT.md`. The focused literature review and venue formatting remain open.
 - No additional project handoff or manuscript is needed: this repository is the current study record. If feature ablation remains outside the paper's scope, report only the executed `set_c` configuration and make no ablation-effect claim.
+- The completed v2/v3 transfer and v3 monotonicity outputs are separate protocol experiments; they must not be presented as one end-to-end temporal v3 reliability result.
 - No additional dataset is required to complete the independent audit of the existing four runs. Additional v3 datasets/time periods would be required for broader external/temporal generalization claims.

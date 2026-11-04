@@ -58,15 +58,17 @@ def run_binary_monotonicity_experiment(config: AppConfig, dataset_path: str | Pa
         embargo_seconds=float(config.split.get("embargo_seconds", 0.0)),
         require_unknown_in_test=False,
     )
-    train_raw = split.train.loc[:, selection.columns].to_numpy(dtype=float)
-    test_raw = split.test.loc[:, selection.columns].to_numpy(dtype=float)
+    # Use the same finite-value replacement and clipping as the other
+    # experiment paths before fitting transforms or creating perturbations.
+    processor = TrainOnlyPreprocessor(selection.columns, float(config.features.get("clip_limit", 1e15)))
+    processor.fit(split.train)
+    train_raw = processor._matrix(split.train)
+    test_raw = processor._matrix(split.test)
     y_train = split.train["__target__"].to_numpy(dtype=int)
     y_test = split.test["__target__"].to_numpy(dtype=int)
     if set(np.unique(y_train)) != {0, 1} or set(np.unique(y_test)) != {0, 1}:
         raise MonotonicityExperimentError("Both binary classes must occur in training and locked test periods")
 
-    processor = TrainOnlyPreprocessor(selection.columns, float(config.features.get("clip_limit", 1e15)))
-    processor.fit(split.train)
     volume_indices = np.array([selection.columns.index(c) for c in volume_columns], dtype=int)
     train_imputed_raw = processor.imputer.transform(train_raw)
     iqr = np.subtract(

@@ -33,7 +33,8 @@ This ledger is the contract between implementation, experiments, metrics, and ma
 - Monotonicity: `binary_monotonicity_sensitivity.csv`, `experiment_metadata.json`.
 - Four main seeds (42–45) have been completed for NF-UNSW-NB15-v3; see `artifacts_rebuilt/EXPERIMENT_RESULTS.md` and `artifacts_rebuilt/multi_seed_summary.csv`. This supports descriptive seed variability for this fixed split, not generalization to other periods or datasets.
 - A v2 cross-dataset pilot exists with 4 seeds and 10k disjoint source/target rows per dataset, but it uses random source splits because timestamps are absent. See `docs/CROSS_DATASET_V2_PILOT.md`; it is exploratory and non-temporal.
-- No real-data monotonicity experiment has been executed; exclude empirical monotonicity claims until one is run.
+- The protocol's v3 binary cross-dataset schema experiment is complete on 200k disjoint source/target samples from NF-UNSW-NB15-v3 and NF-CICIDS2018-v3, with four schemas, four seeds, and both directions. See `docs/CROSS_DATASET_V3_EXPERIMENT.md`. It does not evaluate the full multiclass reliability pipeline.
+- A one-seed real-data v3 binary monotonicity sensitivity run is complete under the specified synthetic feature perturbations. See `docs/MONOTONICITY_V3_EXPERIMENT.md`; do not generalize it to arbitrary attacks or the multiclass pipeline.
 - Baseline comparisons with exact test sample sizes and class prevalences.
 - Tail-fit diagnostics and sensitivity analysis are exported; independent tail validation/uncertainty analysis is still required before a strong EVT-method contribution.
 

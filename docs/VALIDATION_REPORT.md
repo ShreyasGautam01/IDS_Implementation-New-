@@ -24,7 +24,8 @@ The statements in the original report below describe the validation state when i
 - The canonical temporal pipeline completed for seeds 42, 43, 44, and 45 on a fixed split. Per-seed run artifacts remain local under `artifacts_rebuilt/`; a summary is in `EXPERIMENT_RESULTS.md` and `multi_seed_summary.csv`.
 - OSR/routing metrics were independently recomputed from saved predictions and matched metadata exactly. Closed-set accuracy cannot be independently reconstructed from the saved prediction CSV alone because classifier top-1 labels on OSR-rejected rows are not exported.
 - A bounded four-seed binary transfer pilot completed on supplied v2 files using a stratified-random source split. It is not a temporal experiment; see `CROSS_DATASET_V2_PILOT.md`.
-- No real-data monotonicity experiment has been run. Existing monotonicity tests are synthetic software tests only.
+- The protocol's four-schema binary transfer experiment completed on NF-UNSW-NB15-v3 and NF-CICIDS2018-v3 with four seeds in both directions. Its source-side in-domain split is chronological; its fixed target sample spans the target time range. See `CROSS_DATASET_V3_EXPERIMENT.md`.
+- The separate v3 binary monotonicity sensitivity experiment completed for seed 42; see `MONOTONICITY_V3_EXPERIMENT.md`. It is a synthetic perturbation study, not a robustness guarantee.
 - Feature-schema documentation was corrected to match the behavior asserted by source tests. Original manuscript intent still requires confirmation.
 
 ## Environment used for the local check

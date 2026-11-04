@@ -1,0 +1,107 @@
+dataset:
+  release: UQ NetFlow v3
+  path: D:\f7546561558c07c5_NFV3DATA-A11964_A11964\f7546561558c07c5_NFV3DATA-A11964_A11964\data\NF-UNSW-NB15-v3.csv
+  label_column: Attack
+  binary_label_column: Label
+  timestamp_column: FLOW_START_MILLISECONDS
+  end_timestamp_column: FLOW_END_MILLISECONDS
+  numeric_timestamp_unit: ms
+  end_numeric_timestamp_unit: ms
+  unknown_family: Worms
+  benign_aliases:
+  - Benign
+  - Normal
+  - BENIGN
+  - '0'
+  duration_substring: DURATION
+  packet_columns:
+  - IN_PKTS
+  - OUT_PKTS
+  duplicate_audit_sample_size: 200000
+  duplicate_audit_sample_seed: 17
+  transfer_source_sample_size: 200000
+  transfer_target_sample_size: 200000
+  transfer_sample_seed_dataset_a: 1701
+  transfer_sample_seed_dataset_b: 1702
+  transfer_chunk_rows: 250000
+  compute_sha256: true
+split:
+  train_fraction: 0.55
+  validation_fraction: 0.15
+  calibration_fraction: 0.15
+  embargo_seconds: 60
+features:
+  schema_level: set_c
+  clip_limit: 1.0e15
+  monotonic_volume_keywords:
+  - BYTES
+  - PKTS
+  - THROUGHPUT
+  identifiers:
+  - IPV4_SRC_ADDR
+  - IPV4_DST_ADDR
+  - L4_SRC_PORT
+  - L4_DST_PORT
+  - FLOW_ID
+  - TIMESTAMP
+  - FLOW_START_MILLISECONDS
+  - FLOW_END_MILLISECONDS
+  - Dataset
+  groups:
+    ttl:
+    - MIN_TTL
+    - MAX_TTL
+    - STTL
+    - DTTL
+    window:
+    - TCP_WIN_MAX_IN
+    - TCP_WIN_MAX_OUT
+    - INIT_WIN_BYTES_FWD
+    - INIT_WIN_BYTES_BWD
+    protocol:
+    - PROTOCOL
+    - L7_PROTO
+    - ICMP_TYPE
+    - ICMP_IPV4_TYPE
+    - DNS_QUERY_ID
+model:
+  random_state: 42
+  transfer_seeds:
+  - 42
+  - 43
+  - 44
+  - 45
+  parameters:
+    max_iter: 200
+    learning_rate: 0.08
+    max_leaf_nodes: 63
+    l2_regularization: 0.0
+    min_samples_leaf: 20
+    class_weight: balanced
+osr:
+  tail_size: 50
+  tail_size_sensitivity:
+  - 25
+  - 50
+  - 100
+  geometry_fraction: 0.7
+  minimum_validation_group: 20
+  target_known_fpr: 0.05
+conformal:
+  alpha: 0.1
+triage:
+  minimum_margin: 0.25
+evaluation:
+  minimum_unknown_test_rows: 20
+output:
+  directory: artifacts_v3_transfer
+monotonicity:
+  benign_augmentation_fraction: 0.05
+  benign_augmentation_iqr: 6.0
+  epsilon_values:
+  - 0.0
+  - 0.25
+  - 0.5
+  - 0.75
+  - 1.0
+
