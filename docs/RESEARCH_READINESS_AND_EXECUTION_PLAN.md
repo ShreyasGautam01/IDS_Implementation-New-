@@ -92,7 +92,7 @@ Cross-domain and monotonicity questions are separate studies; the available v2 t
 
 ## 5. Immediate audit and implementation tasks
 
-1. Compare the draft and protocol against Arepalli et al. (2026) and its closely related references; state the narrow temporal-v3 extension precisely and avoid a broad novelty claim.
+1. Compare the draft and protocol against Arepalli et al. (2026), Ahmed et al. (2026), and their closely related references; the temporal-shift audit is now cited as context, but the full literature comparison and narrow contribution statement still need review.
 2. Recover/locate the exact v2.1.2 archive/source and any current-study manuscript/specification if available; compare version/method definitions and confirm the manuscript's intended feature ablation. The legacy IEEE package above is not that specification.
 3. Use `docs/MANUSCRIPT_EVIDENCE_MAP.md` as the current claim-to-evidence map. Verify the background bibliography and novelty against primary sources before submission; do not carry forward legacy numbers without exact provenance.
 4. Decide whether more datasets or a newly predeclared test design are needed for broader claims. Any new design after current test inspection must be marked exploratory or separately confirmatory.
