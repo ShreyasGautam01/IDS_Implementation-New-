@@ -101,7 +101,24 @@ Marginal split conformal had 90.44% overall known-class empirical coverage, clos
 
 ### 3.4 Cross-class routing pattern
 
-Overall, 68.56%–69.50% of test rows passed the predeclared automation gate, with 99.75%–99.80% accuracy among automated rows. However, automation coverage ranged from 0.12% for Shellcode to 74.29% for benign flows, and class-wise automated accuracy ranged from 0% for Shellcode to 100% for benign traffic. Backdoor's 0.28% automated accuracy is a particularly clear failure hidden by the aggregate. Every `Worms` test flow was escalated, but only one was rejected by the OSR detector; escalation therefore must not be conflated with unknown detection.
+Overall, 68.56%–69.50% of test rows passed the predeclared automation gate, with 99.75%–99.80% accuracy among automated rows. Table 2 shows the class-wise pattern. Reported values are means ± sample standard deviations across the four classifier seeds on the same split; supports are fixed per seed. This SD measures model-seed variability only.
+
+| Class | Test support | Mondrian coverage (%) | Automated coverage (%) | Accuracy among automated (%) |
+|---|---:|---:|---:|---:|
+| Benign | 322,809 | 90.51 ± 0.17 | 74.29 ± 0.43 | 100.00 ± 0.00 |
+| Analysis | 294 | 63.52 ± 1.72 | 11.14 ± 1.53 | 97.56 ± 3.26 |
+| Backdoor | 1,260 | 49.13 ± 5.30 | 21.47 ± 0.91 | 0.28 ± 0.19 |
+| DoS | 1,234 | 93.66 ± 1.43 | 5.57 ± 1.14 | 39.65 ± 4.91 |
+| Exploits | 10,803 | 93.09 ± 0.18 | 3.26 ± 1.19 | 70.05 ± 8.24 |
+| Fuzzers | 7,387 | 90.98 ± 0.15 | 1.73 ± 0.39 | 40.62 ± 13.30 |
+| Generic | 5,125 | 89.28 ± 0.35 | 68.85 ± 0.32 | 99.75 ± 0.15 |
+| Reconnaissance | 4,540 | 92.01 ± 0.29 | 9.04 ± 1.40 | 85.27 ± 2.43 |
+| Shellcode | 401 | 90.15 ± 1.18 | 0.12 ± 0.25 | 0.00* |
+| Held-out Worms | 36 | — | 0.00 ± 0.00 | — |
+
+*Shellcode automation occurred in too few seed runs to estimate a stable across-seed SD of automated-subset accuracy; the mean among automated examples was 0%.
+
+Automation coverage ranged from 0.12% for Shellcode to 74.29% for benign flows. Backdoor's 0.28% automated accuracy is a particularly clear failure hidden by the aggregate. Every `Worms` test flow was escalated, but only one was rejected by the OSR detector; escalation therefore must not be conflated with unknown detection.
 
 ## 4. Discussion
 
@@ -137,7 +154,7 @@ On one fixed future-time test window from NF-UNSW-NB15-v3, high known-class accu
 - Expand the verified starter bibliography into a balanced related-work review of NIDS reliability, open-set detection, and temporal evaluation; confirm the relevant literature before making any novelty claim.
 - Recover the current-study manuscript or authoritative feature-ablation specification.
 - Confirm the dataset acquisition date and complete citation/metadata.
-- Add the full class-wise results table with uncertainty/support columns and produce publication-ready figures.
+- Produce publication-ready figures from the verified outputs and confirm that the selected venue permits reporting seed SDs for this fixed split.
 - Verify all descriptions against the final selected venue's reporting requirements.
 
 ## References (verified starter set; expand before submission)
