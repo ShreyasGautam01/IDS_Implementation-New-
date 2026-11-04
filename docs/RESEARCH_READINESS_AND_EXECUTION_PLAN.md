@@ -99,7 +99,7 @@ Cross-domain and monotonicity questions are separate studies; the available v2 t
 5. The locked four-seed rerun with the updated exporter is complete. Keep the regenerated output folders and their checksums available with the research archive if per-flow auditability is needed.
 6. Record the actual dataset download/acquisition date and source citation in the provenance manifest; the UQ bagging date is not the project download date.
 7. Run the real-data monotonicity experiment only if that research question remains in scope; otherwise explicitly omit empirical monotonicity results from the paper.
-8. Complete visual and grayscale inspection of Figure 1, then produce the remaining result figures from the locked outputs and keep their plotted values linked to source CSVs.
+8. Complete visual and grayscale inspection of Figures 1–2, then produce any remaining result figures from the locked outputs and keep their plotted values linked to source CSVs.
 9. Once open provenance/specification inputs are resolved, freeze paper tables and draft methods, results, interpretation, discussion, and limitations from artifacts.
 
 ## 6. Acceptance criteria before final paper results

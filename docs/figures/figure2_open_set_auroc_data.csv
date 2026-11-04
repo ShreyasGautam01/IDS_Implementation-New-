@@ -1,0 +1,4 @@
+method,metric,estimate,sample_sd,seed_count,interpretation
+Mahalanobis-Weibull (fixed split),AUROC,0.21568615906730887,,4,Identical deterministic score across four classifier seeds; no seed SD reported.
+Maximum-probability score,AUROC,0.9712882676170927,0.0019238411863994327,4,Mean and sample SD across four classifier seeds on the same fixed split.
+

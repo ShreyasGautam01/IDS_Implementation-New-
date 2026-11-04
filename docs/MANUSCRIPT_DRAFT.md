@@ -91,6 +91,10 @@ Despite high automated-subset accuracy in aggregate, class-wise results were une
 
 The Weibull score rejected 1 of 36 `Worms` flows (2.78%) and had AUROC 0.216 on this fixed test split. The maximum-probability unknown score had AUROC between 0.970 and 0.974 across classifier seeds. The Weibull AUROC and rejection decision were identical across seeds because the open-set calculation is deterministic on this fixed split and does not depend on classifier seed. These repeated values are not independent OSR replications.
 
+![Open-set AUROC for the Mahalanobis–Weibull score and maximum-probability baseline](figures/figure2_open_set_auroc.svg)
+
+**Figure 2.** AUROC for ranking 36 held-out `Worms` flows above 353,853 known flows in the locked future window. The Mahalanobis–Weibull score is deterministic across seeds on this split, so no seed interval is shown. Maximum-probability results are the mean ± sample SD over four classifier seeds on the same split; this SD is not a confidence interval across periods or datasets. The dashed vertical line marks chance ranking.
+
 Changing the tail size did not improve detection: the 25-row fit rejected 0/36 unknowns (AUROC 0.220), the primary 50-row fit rejected 1/36 (AUROC 0.216), and the 100-row fit rejected 1/36 (AUROC 0.205). No tested tail size provided useful unknown-family screening on this period.
 
 Only two of nine nearest-class regions had enough validation examples for fitted rejection thresholds. The remaining seven used the predeclared no-rejection fallback. This further limits the detector's ability to screen unfamiliar flows assigned to those regions.

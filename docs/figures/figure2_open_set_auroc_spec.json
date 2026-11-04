@@ -1,0 +1,13 @@
+{
+  "claim": "On this test window, the Mahalanobis-Weibull score ranks withheld Worms flows below known flows overall, while maximum probability ranks them substantially higher.",
+  "visual_form": "horizontal dot-and-interval comparison",
+  "metric": "AUROC",
+  "unit": "unitless (0 to 1)",
+  "higher_is_better": true,
+  "target_width_mm": 178,
+  "target_height_mm": 85,
+  "uncertainty": "Maximum-probability sample SD across four seeds on one fixed split; not a confidence interval. EVT score is deterministic and identical across seeds.",
+  "support": "36 withheld Worms flows; 353,853 known flows",
+  "output": "SVG vector figure"
+}
+
