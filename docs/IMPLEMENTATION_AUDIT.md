@@ -35,7 +35,7 @@ The project is considered execution-ready only when:
 2. the exact local dataset schema and timestamp meaning are verified;
 3. the audit output is reviewed for class availability and cleaning effects;
 4. at least one full-data run completes without altering its protocol after test inspection;
-5. repeated seeds and separate transfer/monotonicity experiments complete;
+5. repeated seeds complete for the stated experiment; separate transfer/monotonicity studies are either completed under their declared protocols or explicitly marked unrun and excluded from empirical claims;
 6. the claim ledger is updated from real artifacts; and
 7. the manuscript is regenerated from those artifacts.
 
@@ -47,3 +47,10 @@ The project is considered execution-ready only when:
 - Conformal theoretical coverage is conditional on within-class exchangeability, which may fail under temporal drift.
 - Cross-dataset transfer and monotonicity are separate binary experiments, not part of the multiclass integrated pipeline.
 - No measured live-SOC throughput, end-to-end latency, or analyst workload study is supplied by the code.
+
+## Current empirical status (2026-11-04)
+
+- The primary NF-UNSW-NB15-v3 temporal run completed for seeds 42–45 on one fixed split. Cross-run integrity and prediction-derived OSR/routing metrics were audited; see `EXPERIMENT_RESULTS.md` and `RELIABILITY_DIAGNOSTICS.md`.
+- A bounded four-seed binary transfer pilot was run on the available v2 datasets. Both lacked flow timestamps, so source evaluation used stratified random splitting; these are exploratory non-temporal results and do not validate the v3 temporal-transfer protocol. See `CROSS_DATASET_V2_PILOT.md`.
+- A real-data monotonicity experiment has not been run. Existing monotonicity coverage is synthetic testing only.
+- The exact v3 file checksum is recorded. Its source bag identifier is known, but acquisition date is not yet in the experiment manifest.

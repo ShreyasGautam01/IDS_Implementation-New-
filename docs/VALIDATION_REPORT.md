@@ -15,6 +15,18 @@ This report records software validation of the rebuilt implementation. It does n
 
 The final local run completed with **29 tests passed in the most recent run**. The included tests exercise code paths with deterministic synthetic data; they do not demonstrate NetFlow model accuracy or robustness.
 
+## Later validation addendum (2026-11-04)
+
+The statements in the original report below describe the validation state when it was written and are not the current experiment status. Subsequent work:
+
+- The suite was rerun after the timestamp-free v2 transfer fallback and sampler optimization: **34 tests passed**.
+- The full NF-UNSW-NB15-v3 audit completed: 2,365,424 rows; start/end timestamp parsing valid for all rows; no end-before-start intervals; dataset SHA-256 is recorded in run metadata.
+- The canonical temporal pipeline completed for seeds 42, 43, 44, and 45 on a fixed split. Per-seed run artifacts remain local under `artifacts_rebuilt/`; a summary is in `EXPERIMENT_RESULTS.md` and `multi_seed_summary.csv`.
+- OSR/routing metrics were independently recomputed from saved predictions and matched metadata exactly. Closed-set accuracy cannot be independently reconstructed from the saved prediction CSV alone because classifier top-1 labels on OSR-rejected rows are not exported.
+- A bounded four-seed binary transfer pilot completed on supplied v2 files using a stratified-random source split. It is not a temporal experiment; see `CROSS_DATASET_V2_PILOT.md`.
+- No real-data monotonicity experiment has been run. Existing monotonicity tests are synthetic software tests only.
+- Feature-schema documentation was corrected to match the behavior asserted by source tests. Original manuscript intent still requires confirmation.
+
 ## Environment used for the local check
 
 - Python 3.13.5

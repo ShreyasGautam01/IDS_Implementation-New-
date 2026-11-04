@@ -18,7 +18,7 @@ The paper draft used NF-UNSW-NB15-v2 and NF-CSE-CIC-IDS2018-v2 while claiming ch
 
 ## 2. Population and data lineage
 
-For every dataset, record the source release/version, download URL, file name, SHA-256, file size, acquisition date, schema, row count, label counts, and timestamp interpretation. `run_metadata.json` stores the local file hash and structural audit; source release details must be supplied in the study log.
+For every dataset, record the source release/version, download URL, file name, SHA-256, file size, acquisition date, schema, row count, label counts, and timestamp interpretation. `run_metadata.json` stores the local file hash and structural audit. For the current v3 file, the exact local checksum, size, schema, and row counts are recorded, and its UQ data-bag identifier is available in the local package metadata; the acquisition/download date has not been independently recorded and must be added before publication.
 
 The code removes only records satisfying the configured physical-invalidity rules: missing class label, negative numeric duration, or zero/missing total packet count when both packet-count columns exist. Each count is reported. The code does not deduplicate. A sampled exact-duplicate audit is reported as a sample statistic and is never extrapolated into a full-dataset duplicate count.
 
@@ -49,12 +49,14 @@ The pipeline requires each known category to occur in the proper training window
 
 ## 5. Preprocessing and classifier
 
-The model input feature set is determined from column names and dtypes, not from target/test performance. The four feature schemas are nested:
+The model input feature set is determined from column names and dtypes, not from target/test performance. All schemas remove labels, explicit identifiers, and timestamps. The tested implementation defines a nested **feature-removal ablation**:
 
-- `baseline`: remove explicit identifiers and timestamps;
-- `set_a`: baseline plus TTL-related fields;
-- `set_b`: set A plus TCP window fields;
-- `set_c`: set B plus protocol enumeration/identifier fields.
+- `baseline`: retain all present configured TTL, TCP window, and protocol groups;
+- `set_a`: exclude TTL-related fields;
+- `set_b`: exclude TTL and TCP window fields;
+- `set_c`: exclude TTL, TCP window, and protocol enumeration/identifier fields.
+
+This definition follows the executable contract in `features.py` and its unit test. It replaces the earlier, incorrect wording that described the sets as progressively adding groups. Whether this matches the original manuscript's intended comparison remains unverified; do not describe prior results as an additive feature study unless the original study specification confirms that interpretation.
 
 Actual columns removed, present, absent, and retained are stored for every run. Any unexpected non-numeric predictor column causes an explicit error instead of silent deletion.
 
@@ -104,7 +106,7 @@ Report separately: OSR detection rate for unknowns, OSR false-rejection rate for
 
 ## 9. Cross-dataset experiment
 
-This is a separate binary task using the shared `Label` column. For each dataset, draw one deterministic source sample and one deterministic target sample, each bounded by the configured sample-size limit (default 200,000 rows). Reuse those same source and target samples across model seeds so seed variation is not confounded with resampling. For each feature schema and direction, partition the selected source sample globally by its start timestamp, fit preprocessing on source training rows only, and evaluate in-domain on the source's future test period and zero-shot on the fixed target sample. Report the realized source/target sample sizes and class counts. This is a sampled transfer experiment, not a full-population transfer test.
+This is a separate binary task using the shared `Label` column. For each dataset, draw one deterministic source sample and one deterministic target sample, each bounded by the configured sample-size limit (default 200,000 rows). Reuse those same source and target samples across model seeds so seed variation is not confounded with resampling. For timestamped v3 sources, partition the selected source sample globally by its start timestamp and evaluate in-domain on its future test period. If the configured timestamp is absent, the implementation uses a fixed stratified-random source split; this is not a temporal experiment and must be reported separately. Fit preprocessing on source training rows only and evaluate zero-shot on the fixed target sample. Report the realized source/target sample sizes and class counts. This is a sampled transfer experiment, not a full-population transfer test.
 
 Run all declared seeds. Report macro-F1, balanced accuracy, and MCC for each direction and seed. Do not infer success from relative improvement alone; report absolute performance and negative MCC values.
 

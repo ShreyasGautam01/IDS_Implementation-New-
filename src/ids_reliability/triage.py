@@ -90,6 +90,10 @@ def evaluate_triage(
     records = pd.DataFrame({
         "true_class_id": y_true.astype(int),
         "true_class": [id_to_label.get(int(v), "Unknown_held_out") for v in y_true],
+        # Preserve the classifier's closed-set decision before the OSR layer
+        # replaces rejected predictions with the -1 review sentinel.
+        "closed_set_predicted_class_id": predicted_known.astype(int),
+        "closed_set_predicted_class": [id_to_label.get(int(v), "Unknown_held_out") for v in predicted_known],
         "predicted_class_id": predicted_final.astype(int),
         "predicted_class": [id_to_label.get(int(v), "Unknown_held_out") for v in predicted_final],
         "conformal_prediction_set": conformal_set_labels,

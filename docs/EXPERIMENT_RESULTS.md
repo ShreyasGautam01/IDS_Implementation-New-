@@ -23,6 +23,7 @@
 
 ## Interpretation and limitations
 
+- All seeds share the exact same dataset hash, configuration, temporal boundaries, class counts, and row-ordered test labels. OSR scores, thresholds, rejection decisions, and tail-size sensitivity are identical across seeds because these steps are deterministic and do not depend on the classifier seed. The zero OSR seed SD is therefore **not** an uncertainty estimate or independent replication; describe OSR as one fixed-split evaluation with 36 unknown test flows.
 - EVT rejected 1 of 36 held-out Worms flows in each seed (2.78% detection; AUROC 0.216). The max-probability baseline ranked unknowns much better (mean AUROC 0.971), though its AUPR remains low because unknown prevalence is about 0.010%.
 - Only two of nine nearest-class OSR regions received validation-fitted thresholds; the remaining seven used the predeclared no-rejection threshold because their validation groups were too small.
 - Conformal test coverage is empirical under temporal shift; exchangeability is not established. Only 36 unknown test rows make unknown metrics highly uncertain.

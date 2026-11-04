@@ -1,5 +1,9 @@
 # Claim Ledger — allowed manuscript claims for v2.0.0
 
+## Provenance boundary for the legacy IEEE manuscript
+
+The manuscript inside `D:\ResearchPaper\IDS_Reliability_Benchmark_IEEE_Final_Package.zip` is a separate, earlier binary Random Forest study using UNSW-NB15 and CIC-IDS2017. Its motivation—accuracy alone does not expose unreliable predictions, and reliability signals should be compared across distinct failure modes—may be cited as historical project context after bibliographic verification. Its methods, numerical results, and specific claimed gap are not evidence for the current NF-UNSW-NB15-v3 GBDT/Mahalanobis–Weibull experiment. The current study's research question must be justified independently and limited to the experiment actually run.
+
 This ledger is the contract between implementation, experiments, metrics, and manuscript language. A claim may be promoted only when the named artifact exists and passes the acceptance criteria.
 
 | Topic | What the code computes | Permitted wording | Prohibited wording / condition |
@@ -17,7 +21,7 @@ This ledger is the contract between implementation, experiments, metrics, and ma
 | Unknown performance | OSR rejection, escalation, autonomous acceptance reported separately | Report each metric separately with denominator. | Equating escalation rate with OSR detection rate. |
 | AURC | Margin-ranked risk over all test rows | “Evidence-margin ranking AURC.” | Claim that it exactly evaluates the routing gate; gate-specific automation metrics are separate. |
 | Cross-dataset transfer | Binary GBDT, source-only scaling, fixed target sample, two directions | “Binary zero-shot cross-dataset transfer under the stated protocol.” | Claim that the full multiclass OSR/conformal/SOC architecture transfers. |
-| Monotonicity | Separate binary-only constrained GBDT sensitivity experiment | “Positive monotonic constraints were tested on configured volumetric features in a separate binary experiment.” | Multiclass monotonicity guarantee or arbitrary adversarial robustness. |
+| Monotonicity | Code implements a separate binary-only constrained GBDT sensitivity experiment; current tests use synthetic data | No real-data empirical claim is currently supported. | Do not say the monotonicity experiment was completed on a network dataset; no multiclass monotonicity guarantee or arbitrary adversarial robustness. |
 | Runtime | Runtime not currently a primary recorded benchmark | No line-rate claim until measured on stated hardware and batch sizes. | “Line-rate” or low-latency deployment claim. |
 
 ## Required outputs before manuscript writing
@@ -26,6 +30,8 @@ This ledger is the contract between implementation, experiments, metrics, and ma
 - Cross-dataset: `cross_dataset_per_seed.csv`, `cross_dataset_summary.csv`, `experiment_metadata.json`.
 - Monotonicity: `binary_monotonicity_sensitivity.csv`, `experiment_metadata.json`.
 - Four main seeds (42–45) have been completed for NF-UNSW-NB15-v3; see `artifacts_rebuilt/EXPERIMENT_RESULTS.md` and `artifacts_rebuilt/multi_seed_summary.csv`. This supports descriptive seed variability for this fixed split, not generalization to other periods or datasets.
+- A v2 cross-dataset pilot exists with 4 seeds and 10k disjoint source/target rows per dataset, but it uses random source splits because timestamps are absent. See `docs/CROSS_DATASET_V2_PILOT.md`; it is exploratory and non-temporal.
+- No real-data monotonicity experiment has been executed; exclude empirical monotonicity claims until one is run.
 - Baseline comparisons with exact test sample sizes and class prevalences.
 - Tail-fit diagnostics and sensitivity analysis are exported; independent tail validation/uncertainty analysis is still required before a strong EVT-method contribution.
 
@@ -44,3 +50,7 @@ This ledger is the contract between implementation, experiments, metrics, and ma
 - Only two of nine nearest-class regions receive validation-fitted OSR thresholds. The other seven use the predeclared threshold 1.0 because their validation groups are too small. This limitation must be stated.
 - Four-seed known closed-set accuracy is 0.9645–0.9647. Automated coverage is 0.6856–0.6950 and automated-subset accuracy is 0.9975–0.9980. These are benchmark results, not deployment-safety evidence.
 - The temporal conformal coverage is empirical; exchangeability under temporal drift is not established. Unknown support is too small for precise estimates.
+- Feature schema names denote removal ablations in the executable implementation and unit tests: baseline retains all configured groups; `set_a` excludes TTL; `set_b` excludes TTL plus window; `set_c` excludes all three groups. The protocol now documents this. The original manuscript's intended direction remains unverified.
+- Four-seed post-run diagnostics are in `docs/RELIABILITY_DIAGNOSTICS.md`: tail sizes 25/50/100 do not make the EVT detector useful; marginal conformal has zero observed coverage for every non-benign known class; Mondrian improves class distribution but Analysis and Backdoor remain below nominal; routing aggregate accuracy hides very poor automated accuracy for Backdoor and Shellcode.
+- Existing completed-run prediction files independently reproduce OSR and routing metrics. They do not separately export closed-set classifier top-1 labels on OSR-rejected rows, limiting closed-set metric recomputation from those CSVs alone.
+- The pipeline exporter now includes `closed_set_predicted_class_id` and `closed_set_predicted_class` before OSR rejection. Existing completed-run CSVs retain the old schema; regenerate outputs before claiming artifact-only reproduction of closed-set metrics.
