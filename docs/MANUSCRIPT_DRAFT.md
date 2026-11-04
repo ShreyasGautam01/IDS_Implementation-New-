@@ -28,6 +28,16 @@ Arepalli et al. studied conformal analyst triage and unseen-family novelty detec
 
 The present evaluation uses the NF-UNSW-NB15-v3 NetFlow release and one fixed future-time holdout. Its four primary partitions are temporally ordered, calibration precedes test, full flow intervals are checked at partition boundaries, and a 60-second embargo is applied. The withheld `Worms` family has only 36 test observations. The primary novelty detector is class-conditional Mahalanobis–Weibull, compared here with maximum probability. These design differences support a limited replication/extension question about a timestamped NetFlow version and stricter temporal partitioning; they do not support a claim of a generally new reliability framework.
 
+| Dimension | Arepalli et al. (2026) [6] | Present evaluation |
+|---|---|---|
+| Main data | UNSW-NB15 and CIC-IDS2017 | NF-UNSW-NB15-v3 |
+| Unknown-family design | 15 leave-one-family-out experiments; separate weekday-based CIC temporal analysis | One withheld family (`Worms`) in one locked future test window |
+| Novelty scores | Maximum-probability, nearest-neighbor distance, and Isolation Forest variants | Class-conditional Mahalanobis–Weibull score vs maximum probability |
+| Temporal protocol | Earlier CIC weekdays for fitting; later weekdays for calibration/test, randomly divided within the later period | Strictly ordered train/validation/calibration/test windows; complete-flow boundary checks and 60-second embargo |
+| Main limitation for comparison | Multiple families and datasets, but a different dataset/version and protocol | Narrow evidence: only 36 unknown test flows on one dataset/window |
+
+This comparison motivates the limited scope of the contribution. It does not establish superiority over the prior study or its methods; its reported numbers are not directly comparable because the datasets, partitions, scores, and denominators differ.
+
 ### 2.2 Dataset and label construction
 
 We used the local `NF-UNSW-NB15-v3.csv` file identified in the run metadata by SHA-256 `4ebb97bd74412d566137d95a6fc3ffd8f374f1cf8cfe204d007848e7a668f9b5` and size 577,360,958 bytes. The analyzed file contains 2,365,424 flows [1]. The dataset acquisition date was not recorded and must be added from provenance records before publication.
