@@ -12,7 +12,7 @@ This document separates observed facts from interpretations and open decisions. 
 ### Verified facts
 
 - The implementation in the uploaded snapshot identifies itself as package v2.0.0. The current local project includes follow-up changes for `uv`, timestamp-free binary transfer, and four-seed v3 experiment reporting.
-- The prior GitHub commit `ee1ffd0` is a root commit on `codex/ids-project-upload`. This branch was pushed because the remote `main` already had an unrelated README commit. Work for this audit is on a separate local branch.
+- The prior GitHub commit `ee1ffd0` is a root commit on `codex/ids-project-upload`. This branch was pushed because the remote `main` already had an unrelated README commit. Audit work is published on the separate `research/baseline-audit` branch; neither existing branch was rewritten.
 - The local older package `D:\ResearchPaper\IDS_Reliability_Benchmark_Rework_Package\ids_rework_v2` exists. The handoff's separate v2.1.2 archive/source was not located during this audit and cannot currently be compared.
 - A legacy IEEE final package was found at `D:\ResearchPaper\IDS_Reliability_Benchmark_IEEE_Final_Package.zip`. Its manuscript is titled “Beyond Accuracy: Benchmarking Lightweight Reliability Signals for Intrusion Detection Under Unseen Attacks and Distribution Shift.” It describes a different study: a binary Random Forest benchmark on UNSW-NB15 and CIC-IDS2017, with raw confidence, tree disagreement, distance, conformal prediction, withheld-family tests, and cross-dataset shift. It is useful evidence of the project's earlier motivation, but it is not the current GBDT/Mahalanobis–Weibull v3 study specification.
 - The legacy manuscript's stated gap is that closed-set accuracy does not tell operators when predictions are unreliable, and that lightweight reliability signals had not been compared across distinct failure modes (ordinary errors, withheld attack families, and cross-dataset shift) in a controlled benchmark. Its stated contribution and results must not be attributed to the current v3 experiment.
@@ -20,7 +20,7 @@ This document separates observed facts from interpretations and open decisions. 
 
 ### Open
 
-- Remote branch inventory and current `main` state still need confirmation through GitHub because direct `git ls-remote` was blocked by a local network/DNS failure. Do not merge into `main` as part of this audit.
+- The audit branch is confirmed on GitHub. Current `main` state has not been independently compared with this branch; do not merge into `main` as part of this audit.
 - Compare the current snapshot with v2.1.2 only if that package becomes available.
 
 ## 2. Existing empirical evidence
